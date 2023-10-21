@@ -57,7 +57,7 @@ typedef enum {
 	Dio_PORTA,
 	Dio_PORTB,
 	Dio_PORTC,
-	Dio_PORTD
+	Dio_PORTD,
 }Dio_PortType;
 
 typedef enum {
@@ -72,14 +72,18 @@ typedef enum {
 }Dio_PinType;
 
 typedef enum {
-	STD_OUT,
-	STD_IN
+	STD_IN,
+	STD_OUT
 }Dio_DirectionType;
 
+typedef u8 Dio_PortLevelType;
 
 void Dio_WriteChannel(Dio_ChannelType ChannelId, Dio_LevelType Level);
 Dio_LevelType Dio_ReadChannel(Dio_ChannelType ChannelId);
 Dio_LevelType Dio_FlipChannel(Dio_ChannelType ChannelId);
+Dio_PortLevelType Dio_ReadPort(Dio_PortType PortId);
+void Dio_WritePort(Dio_PortType PortId,Dio_PortLevelType Level);
 
-
+//Dio_PortLevelType Dio_ReadChannelGroup(const Dio_ChannelGroupType* ChannelGroupIdPtr);
+//void Dio_WriteChannelGroup(const Dio_ChannelGroupType* ChannelGroupIdPtr,Dio_PortLevelType Level);
 #endif /* MCAL_DIO_DIO_H_ */

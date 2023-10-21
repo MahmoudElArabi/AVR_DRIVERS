@@ -10,13 +10,15 @@
 
 #include "../DIO/DIO.h"
 
+
+
 typedef struct {
 		Dio_PortType Port;
 		Dio_PinType Pin;
 		Dio_DirectionType Direction;
 }Pin_ConfigType;
 
-
-void Port_Init ();
+void Port_Init (Pin_ConfigType *pins_cfg);
+void Port_SetPinDirection (Dio_ChannelType Pin,Dio_DirectionType Direction);
 
 #endif /* MCAL_PORT_PORT_H_ */
