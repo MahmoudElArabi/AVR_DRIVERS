@@ -8,74 +8,21 @@
 #include "MCAL/PORT/PORT.h"
 #include "HAL/LCD/LCD.h"
 #include "HAL/7SEGMENTS/7SEG.h"
+#include "MCAL/GI/GI_Interface.h"
+#include "MCAL/EXTI/EXTI_Interface.h"
 
-
-int main()
+void dioflip(void)
 {
-	lcd4_Init();
-	lcd4_disply_char('M');
-	_delay_ms(200);
-	lcd4_disply_char('A');
-	_delay_ms(200);
-	lcd4_disply_char('H');
-	_delay_ms(200);
-	lcd4_disply_char('M');
-	_delay_ms(200);
-	lcd4_disply_char('O');
-	_delay_ms(200);
-	lcd4_disply_char('U');
-	_delay_ms(200);
-	lcd4_disply_char('D');
-	_delay_ms(200);
-	lcd4_disply_char('_');
-	_delay_ms(200);
-	lcd4_disply_char('A');
-	_delay_ms(200);
-	lcd4_disply_char('R');
-	_delay_ms(200);
-	lcd4_disply_char('A');
-	_delay_ms(200);
-	lcd4_disply_char('B');
-	_delay_ms(200);
-	lcd4_disply_char('Y');
-	_delay_ms(200);
-	lcd4_disply_char('!');
-	_delay_ms(350);
-	lcd4_CLR();
-	_delay_ms(350);
-	lcd4_disply_char('.');
-	_delay_ms(350);
-	lcd4_disply_char('.');
-	_delay_ms(350);
-	lcd4_disply_char('.');
-	_delay_ms(350);
-	lcd4_disply_char('.');
-	_delay_ms(100);
-	lcd4_disply_char('.');
-	_delay_ms(110);
-	lcd4_disply_char('.');
-	_delay_ms(100);
-	lcd4_disply_char('.');
-	_delay_ms(100);
-	lcd4_disply_char('.');
-	_delay_ms(100);
-	lcd4_disply_char('.');
-	_delay_ms(300);
-	lcd4_disply_char('.');
-	lcd4_CLR();
-	lcd4_disply_char_at_X_Y('>', 2,3);
-	lcd4_disply_char('>');
-	lcd4_disply_char('>');
-	lcd4_disply_char_at_X_Y('<', 2,16);
-	lcd4_disply_char('<');
-	lcd4_disply_char('<');
-	_delay_ms(350);
-	lcd4_disply_char_at_X_Y('N', 2,6);
-	lcd4_disply_string("TI_GROUP2");
-	lcd4_disply_char_at_X_Y('M', 3,3);
-	lcd4_disply_string("ahmoud El Arabi");
-	while(1)
-	{
+	Dio_FlipChannel(PA_5);
+}
+int main() {
+
+	GI_voidEnable();
+	EXTI_voidInit(EXTI_INT1 ,FALLING_EDGE);
+	EXTI_voidEnable(EXTI_INT1);
+	EXTRI_voidSetCallBackINT1(dioflip);
+	while (1) {
 
 	}
+	return 0;
 }

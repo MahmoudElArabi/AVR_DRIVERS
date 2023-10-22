@@ -7,7 +7,7 @@
 
 #include "LCD.h"
 
-
+/*************** Helper Functions ***************/
 static void LCD_Data_write(u8 data)
 {
 	Dio_WriteChannel(RS,STD_HIGH);
@@ -31,7 +31,7 @@ static void LCD_Data_write(u8 data)
 	_delay_ms(1);
 }
 
-void LCD_Command_Write(u8 command)
+static void LCD4_Command_Write(u8 command)
 {
 	Dio_WriteChannel(RS,STD_LOW);
 
@@ -58,21 +58,25 @@ static void lcd4_set_cursor(u8 row, u8 coul){
     coul--;
     switch (row){
         case ROW1:
-            LCD_Command_Write(0x80+coul);
+            LCD4_Command_Write(0x80+coul);
         break;
         case ROW2:
-            LCD_Command_Write(0xC0+coul);
+            LCD4_Command_Write(0xC0+coul);
         break;
         case ROW3:
-            LCD_Command_Write(0x94+coul);
+            LCD4_Command_Write(0x94+coul);
         break;
         case ROW4:
-            LCD_Command_Write(0xD4+coul);
+            LCD4_Command_Write(0xD4+coul);
         break;
         default:;
 
     }
 }
+
+
+
+/************************************************/
 
 void lcd4_Init(void)
 {
@@ -88,27 +92,23 @@ void lcd4_Init(void)
 	};
 	Port_Init(LCD_pins);
 	_delay_ms(50);
-	LCD_Command_Write(LCD_CURSOR_HOME);
-	LCD_Command_Write(0x28);	//LCD 4bit mode, 2 line
+	LCD4_Command_Write(LCD_CURSOR_HOME);
+	LCD4_Command_Write(LCD_FUNCTION_SET_4_BIT_2_LINE_8_DOTS);	//LCD 4bit mode, 2 line
 	_delay_ms(1);
-	LCD_Command_Write(0x0f); //cursor on off,blink  0x0f,0x0c,0x0e
+	LCD4_Command_Write(LCD_DISPLAY_ON_UNDER_LINE_CURSOR_ON_BLOCK_CURSOR_ON); //cursor on off,blink  0x0f,0x0c,0x0e
 	_delay_ms(1);
-	LCD_Command_Write(0x01); //clear screen
+	LCD4_Command_Write(LCD_CLEAR_COMMAND); //clear screen
 	_delay_ms(2);
-	LCD_Command_Write(0x06);	//increase DDRAM address
+	LCD4_Command_Write(LCD_ENTRY_MODE_INC_SHIFT_OFF);	//increase DDRAM address
 	_delay_ms(1);
 
-//	LCD_Command_Write(LCD_CLEAR_COMMAND); //clear screen
-//	LCD_Command_Write(LCD_CURSOR_HOME);
-//	LCD_Command_Write(LCD_ENTRY_MODE_INC_SHIFT_OFF);
-	LCD_Command_Write(LCD_DISPLAY_ON_UNDER_LINE_CURSOR_OFF_BLOCK_CURSOR_OFF);
-//	LCD_Command_Write(LCD_FUNCTION_SET_4_BIT_2_LINE_8_DOTS);
-	LCD_Command_Write(0x80);
+	LCD4_Command_Write(LCD_DISPLAY_ON_UNDER_LINE_CURSOR_OFF_BLOCK_CURSOR_OFF);
+	LCD4_Command_Write(LCD_DDRAM_START);
 }
 
 void lcd4_CLR(void)
 {
-	LCD_Command_Write(0x01);
+	LCD4_Command_Write(0x01);
 }
 
 void lcd4_disply_char (u8 character)
@@ -116,7 +116,7 @@ void lcd4_disply_char (u8 character)
 	LCD_Data_write(character);
 }
 
-void lcd4_disply_string (u8* str)
+void lcd4_disply_string (const u8* str)
 {
 	 while (*str){
 		lcd4_disply_char(*str);
@@ -133,6 +133,25 @@ void lcd4_disply_char_at_X_Y (u8 data, u8 row, u8 col)
 void lcd4_disply_string_at_X_Y(u8* data, u8 row, u8 col)
 {
 	lcd4_set_cursor(row, col);
-	lcd4_disply_string(&data);
+	lcd4_disply_string(data);
 }
 
+void lcd4_disply_num(u16 num) {
+    char num_str[7];  // Assuming a 7-character buffer is sufficient
+    snprintf(num_str, sizeof(num_str), "%d", num);
+
+    // Display the string on the LCD character by character
+    for (int i = 0; num_str[i] != '\0'; i++) {
+        lcd4_disply_char(num_str[i]);
+    }
+}
+
+void lcd4_disply_CustomCharacter(u8 row, u8 col, u8* CustomCharacter, u8 MemPos)
+{
+	LCD4_Command_Write(LCD_CGRAM_START + (MemPos * 8));
+	for(int i = 0 ; i < 8 ; i++)
+	{
+		LCD_Data_write(CustomCharacter[i]);
+	}
+	lcd4_disply_char_at_X_Y(MemPos, row, col);
+}

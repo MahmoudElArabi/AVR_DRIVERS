@@ -69,19 +69,19 @@ Dio_LevelType Dio_FlipChannel(Dio_ChannelType ChannelId)
 	{
 	case Dio_PORTA:
 		TOG_BIT(PORTA, ChannelId);
-		ret = GET_BIT(PINA, ChannelId);
+		ret = GET_BIT(PORTA, ChannelId);
 		break;
 	case Dio_PORTB:
 		TOG_BIT(PORTB, ChannelId % 8);
-		ret = GET_BIT(PINB, ChannelId %8);
+		ret = GET_BIT(PORTB, ChannelId %8);
 		break;
 	case Dio_PORTC:
 		TOG_BIT(PORTC, ChannelId % 8);
-		ret = GET_BIT(PINC, ChannelId % 8);
+		ret = GET_BIT(PORTC, ChannelId % 8);
 		break;
 	case Dio_PORTD:
 		TOG_BIT(PORTD, ChannelId % 8);
-		ret = GET_BIT(PIND, ChannelId % 8);
+		ret = GET_BIT(PORTD, ChannelId % 8);
 		break;
 	default:	break;
 	}
@@ -90,7 +90,7 @@ Dio_LevelType Dio_FlipChannel(Dio_ChannelType ChannelId)
 
 Dio_PortLevelType Dio_ReadPort(Dio_PortType PortId)
 {
-	Dio_PortLevelType ret;
+	Dio_PortLevelType ret = 0;
 	switch(PortId)
 	{
 	case Dio_PORTA:

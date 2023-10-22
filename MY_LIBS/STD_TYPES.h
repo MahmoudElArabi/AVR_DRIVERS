@@ -8,6 +8,7 @@
 #ifndef MY_LIBS_STD_TYPES_H_
 #define MY_LIBS_STD_TYPES_H_
 
+#include <stdio.h>
 #include <avr/io.h>
 #include "util/delay.h"
 
@@ -20,6 +21,5 @@ typedef signed long int		s32;
 typedef float				f32;
 typedef double				f64;
 
-#define NULL				(void*)0
 
 #endif /* MY_LIBS_STD_TYPES_H_ */

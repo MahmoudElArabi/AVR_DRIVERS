@@ -77,12 +77,12 @@
 
 void lcd4_Init(void);
 void lcd4_CLR(void);
-void LCD_Command_Write (u8 command);
 void lcd4_disply_char (u8 data);
+void lcd4_disply_string (const u8* data);
 void lcd4_disply_char_at_X_Y (u8 data, u8 row, u8 col);
 void lcd4_disply_string_at_X_Y(u8* data, u8 row, u8 col);
-void lcd4_disply_string (u8* data);
-void lcd4_disply_num (u8 num);
-//void lcd4_CreateCustomCharacter(u8* Address_pu8CustomCharacter, u8 Copy_u8MemoryIndex);)
+void lcd4_disply_num (u16 num);
+
+void lcd4_disply_CustomCharacter(u8 row, u8 col, u8* CustomCharacter, u8 MemoryPos);
 
 #endif /* HAL_7SEGMENTS_LCD_H_ */
