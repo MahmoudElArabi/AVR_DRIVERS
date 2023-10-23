@@ -8,7 +8,9 @@
 #include "EXTI_interface.h"
 #include "EXTI_register.h"
 
-static void (*prviate_pCallBackINT1) (void)=NULL;
+static void (*EXTI_prviate_PtrCallBack0) (void)=NULL;
+static void (*EXTI_prviate_PtrCallBack1) (void)=NULL;
+static void (*EXTI_prviate_PtrCallBack2) (void)=NULL;
 
 void EXTI_voidInit(u8 copy_u8InterruptSource, u8 copy_u8SenseControl)
 {
@@ -84,7 +86,6 @@ void EXTI_voidEnable(u8 copy_u8InterruptSource) {
 	case EXTI_INT2:
 		SET_BIT(_GICR, INT2);
 		break;
-
 	}
 }
 
@@ -103,18 +104,56 @@ void EXTI_voidDisable(u8 copy_u8InterruptSource) {
 	}
 }
 
-void EXTRI_voidSetCallBackINT1(void (*ptrToFunction)(void)){
-	if(ptrToFunction !=NULL)
+/*************** CallBacks ***************/
+void EXTI_voidSendCallBack0(void (*PtrF)(void)){
+	if(PtrF !=NULL)
 	{
-		prviate_pCallBackINT1 = ptrToFunction;
+		EXTI_prviate_PtrCallBack0 = PtrF;
 	}
 }
+
+void EXTI_voidSendCallBack1(void (*PtrF)(void)){
+	if(PtrF !=NULL)
+	{
+		EXTI_prviate_PtrCallBack1 = PtrF;
+	}
+}
+
+void EXTI_voidSendCallBack2(void (*PtrF)(void)){
+	if(PtrF !=NULL)
+	{
+		EXTI_prviate_PtrCallBack2 = PtrF;
+	}
+}
+
+
+
+/*************** ISRs ***************/
+void __vector_1(void) __attribute__((signal));
+void __vector_1(void)
+{
+	if(EXTI_prviate_PtrCallBack0 !=NULL)
+	{
+		EXTI_prviate_PtrCallBack0();
+	}
+}
+
 
 void __vector_2(void) __attribute__((signal));
 void __vector_2(void)
 {
-	if(prviate_pCallBackINT1 !=NULL)
+	if(EXTI_prviate_PtrCallBack1 !=NULL)
 	{
-		prviate_pCallBackINT1();
+		EXTI_prviate_PtrCallBack1();
 	}
 }
+
+void __vector_3(void) __attribute__((signal));
+void __vector_3(void)
+{
+	if(EXTI_prviate_PtrCallBack2 !=NULL)
+	{
+		EXTI_prviate_PtrCallBack2();
+	}
+}
+

@@ -1,26 +1,53 @@
 /*
  * main.c
  *
+ *  Created on: Oct 23, 2023
+ *      Author: Mahmoud El Arabi
+ */
+
+
+/*
+ * main.c
+ *
  *  Created on: Oct 20, 2023
  *      Author: Mahmoud El Arabi
  */
 
-#include "MCAL/PORT/PORT.h"
-#include "HAL/LCD/LCD.h"
-#include "HAL/7SEGMENTS/7SEG.h"
-#include "MCAL/GI/GI_Interface.h"
-#include "MCAL/EXTI/EXTI_Interface.h"
+#include "main_h.h"
 
-void dioflip(void)
+
+void ISR0(void)
+{
+	Dio_FlipChannel(PA_4);
+}
+
+void ISR1(void)
 {
 	Dio_FlipChannel(PA_5);
 }
-int main() {
 
+void ISR2(void)
+{
+	Dio_FlipChannel(PA_6);
+}
+int main() {
 	GI_voidEnable();
-	EXTI_voidInit(EXTI_INT1 ,FALLING_EDGE);
+	EXTI_voidInit(EXTI_INT0 ,RISING_EDGE);
+	EXTI_voidInit(EXTI_INT1 ,RISING_EDGE);
+	EXTI_voidInit(EXTI_INT2 ,RISING_EDGE);
+
+	EXTI_voidEnable(EXTI_INT0);
 	EXTI_voidEnable(EXTI_INT1);
-	EXTRI_voidSetCallBackINT1(dioflip);
+	EXTI_voidEnable(EXTI_INT2);
+
+	EXTI_voidSendCallBack0(ISR0);
+	EXTI_voidSendCallBack1(ISR1);
+	EXTI_voidSendCallBack2(ISR2);
+
+	Port_Init(pins);
+	Dio_WriteChannel(PA_4, 1);
+	Dio_WriteChannel(PA_5, 1);
+	Dio_WriteChannel(PA_6, 1);
 	while (1) {
 
 	}

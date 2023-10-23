@@ -44,6 +44,8 @@ void EXTI_voidInit(u8 copy_u8InterruptSource , u8 copy_u8SenseControl);
 void EXTI_voidEnable(u8 copy_u8InterruptSource);
 void EXTI_voidDisable(u8 copy_u8InterruptSource);
 
-void EXTRI_voidSetCallBackINT1(void (*ptrToFunction)(void));
+void EXTI_voidSendCallBack0(void (*PtrF)(void));
+void EXTI_voidSendCallBack1(void (*PtrF)(void));
+void EXTI_voidSendCallBack2(void (*PtrF)(void));
 
 #endif /* MCAL_EXTI_EXTI_INTERFACE_H_ */
