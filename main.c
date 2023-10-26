@@ -13,10 +13,13 @@ void ISR_CTC(void)
 	Dio_FlipChannel(PA_4);
 }
 int main() {
+	TMR2_voidSetDelay_ms_using_CTC(2000);
 	Port_Init(pins);
 	GI_voidEnable();
 	TMR2_voidSendCallBack_OCM(ISR_CTC);
+
 	TMR2_voidInit();
+
 	TMR2_voidStart();
 	while (1) {
 

@@ -114,15 +114,18 @@ void TMR2_Preload_value_set(u8 value)
  */
 void TMR2_voidSetDelay_ms_using_CTC(u16 _del_ms)
 {
-#if TMR2_PRESCALER == 1
+#if   TMR2_PRESCALER == 1
 	private_CTC_counter = (_del_ms*1000) / ((TMR2_OCR2_val + 1) * 0.0625);
 #elif TMR2_PRESCALER == 8
 	private_CTC_counter = (_del_ms*1000) / ((TMR2_OCR2_val + 1) * 0.5);
+#elif TMR2_PRESCALER == 32
+	private_CTC_counter = (_del_ms*1000) / ((TMR2_OCR2_val + 1) * 2);
 #elif TMR2_PRESCALER == 64
 	private_CTC_counter = (_del_ms*1000) / ((TMR2_OCR2_val + 1) * 4);
+#elif TMR2_PRESCALER == 128
+	private_CTC_counter = (_del_ms*1000) / ((TMR2_OCR2_val + 1) * 8);
 #elif TMR2_PRESCALER == 256
 	private_CTC_counter = (_del_ms*1000) / ((TMR2_OCR2_val + 1) * 16);
-
 #elif TMR2_PRESCALER == 1024
 	private_CTC_counter = (_del_ms*1000) / ((TMR2_OCR2_val + 1) * 64);
 #endif
