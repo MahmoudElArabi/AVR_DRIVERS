@@ -6,13 +6,6 @@
  */
 
 
-/*
- * main.c
- *
- *  Created on: Oct 20, 2023
- *      Author: Mahmoud El Arabi
- */
-
 #include "main_h.h"
 
 
@@ -40,14 +33,15 @@ int main() {
 	EXTI_voidEnable(EXTI_INT1);
 	EXTI_voidEnable(EXTI_INT2);
 
-	EXTI_voidSendCallBack0(ISR0);
-	EXTI_voidSendCallBack1(ISR1);
-	EXTI_voidSendCallBack2(ISR2);
+	EXTI0_voidSendCallBack(ISR0);
+	EXTI1_voidSendCallBack(ISR1);
+	EXTI2_voidSendCallBack(ISR2);
 
 	Port_Init(pins);
 	Dio_WriteChannel(PA_4, 1);
 	Dio_WriteChannel(PA_5, 1);
 	Dio_WriteChannel(PA_6, 1);
+
 	while (1) {
 
 	}
