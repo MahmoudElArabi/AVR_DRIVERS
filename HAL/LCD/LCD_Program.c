@@ -10,12 +10,13 @@
 #include "LCD_Interface.h"
 
 
-/* ----------------- Section : Static "Private" Functions Declaration -----------------*/
+/* ----------------- Section : Static "Private" Functions Declaration / Globals -----------------*/
 
 static void LCD_Data_write(u8 data);
 static void LCD4_Command_Write(u8 command);
 static void lcd4_set_cursor(u8 row, u8 coul);
 
+u8 current_pos = 0;
 
 /* ----------------- Section : Software Interfaces Implementation -----------------*/
 
@@ -69,7 +70,20 @@ void lcd4_CLR(void)
  */
 void lcd4_disply_char (const u8 character)
 {
+	if(current_pos == 20 )
+	{
+		lcd4_set_cursor(2, 1);
+	}
+	else if(current_pos == 40 )
+	{
+		lcd4_set_cursor(3, 1);
+	}
+	else if(current_pos == 60 )
+	{
+		lcd4_set_cursor(4, 1);
+	}
 	LCD_Data_write(character);
+	current_pos ++;
 }
 
 /**
@@ -213,7 +227,7 @@ static void lcd4_set_cursor(u8 row, u8 coul){
         case ROW4:
             LCD4_Command_Write(0xD4+coul);
         break;
-        default:;
-
+        default:
+        	break;
     }
 }

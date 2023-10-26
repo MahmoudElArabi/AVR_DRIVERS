@@ -5,21 +5,32 @@
  *      Author: Mahmoud El Arabi
  */
 
+/* ----------------- Section : includes -----------------*/
+
 #include "TMR0_Interface.h"
 
-/***********************/
+/* ----------------- Section : Static "Private" Functions / Functions pointers -----------------*/
 static volatile u16 private_CTC_counter = 0;
-/***********************/
+
 static void (*privatePTR_OV) (void) = NULL;
 static void (*privatePTR_OC) (void) = NULL;
 static void select_mode(u8 mode);
+#if TMR0_MODE 	== TMR0_NORMAL_MODE
 static void Enable_OVI(void);
+#elif TMR0_MODE == TMR0_CTC_MODE
 static void Enable_OCI(void);
+#endif
 static void PrescalerValue_set(u16 value);
-static void TMR0_Compare_match_value_set(u8 value);
 
-/***********************/
 
+
+/* ----------------- Section : Software Interfaces Implementation -----------------*/
+
+/**
+ * TMR0_voidInit : Initializes Timer 0 (TMR0) with the desired MODE
+ * @param	void
+ * @return	void
+ */
 void TMR0_voidInit(void)
 {
 #if TMR0_MODE 	== TMR0_NORMAL_MODE
@@ -29,7 +40,7 @@ void TMR0_voidInit(void)
 #elif TMR0_MODE == TMR0_CTC_MODE
 	select_mode(CTC);
 	Enable_OCI();
-	TMR0_Compare_match_value_set(TMR0_OCR0_val);
+	_OCR0 = (TMR0_OCR0_val);
 #elif TMR0_MODE == TMR0_FastPWM_MODE
 	select_mode(FastPWM);
 	switch(Fast_PWM_MODE)
@@ -43,14 +54,37 @@ void TMR0_voidInit(void)
 		SET_BIT(_TCCR0, 5);
 		break;
 	}
+#elif TMR0_MODE == TMR0_Phase_Correct_PWM_MODE
+	select_mode(Phase_Correct_PWM);
+	switch(Phase_correct_PWM_MODE)
+	{
+	case non_inverting:
+		CLR_BIT(_TCCR0, 4);
+		SET_BIT(_TCCR0, 5);
+		break;
+	case inverting:
+		SET_BIT(_TCCR0, 4);
+		SET_BIT(_TCCR0, 5);
+		break;
+	}
 #endif
 }
 
+/**
+ * TMR0_voidStart : Starts ( begin the counting ) Timer 0 (TMR0) operation
+ * @param	void
+ * @return	void
+ */
 void TMR0_voidStart(void)
 {
 	PrescalerValue_set((u16)TMR0_PRESCALER);
 }
 
+/**
+ * TMR0_voidStop : Stops ( halt  the counting ) Timer 0 (TMR0) operation
+ * @param	void
+ * @return	void
+ */
 void TMR0_voidStop(void)
 {
 	CLR_BIT(_TCCR0,0);
@@ -58,27 +92,24 @@ void TMR0_voidStop(void)
 	CLR_BIT(_TCCR0,2);
 }
 
+/**
+ * TMR0_Preload_value_set : Sets the initial preload value for Timer 0 (TMR0)
+ * @param	value: The preload value to be set
+ * @return	void
+ */
 void TMR0_Preload_value_set(u8 value)
 {
 	_TCNT0 = value;
 }
 
-void TMR0_voidSendCallBack_OVF(void (*PtrF)(void))
-{
-	if(PtrF != NULL)
-	{
-		privatePTR_OV = PtrF;
-	}
-}
 
-void TMR0_voidSendCallBack_OCM(void (*PtrF)(void))
-{
-	if(PtrF != NULL)
-	{
-		privatePTR_OC = PtrF;
-	}
-}
 
+
+/**
+ * TMR0_voidSetDelay_ms_using_CTC : Sets a delay in milliseconds using Timer 0 (TMR0) in Clear Timer on Compare Match (CTC) mode
+ * @param	_del_ms:  The desired delay in milliseconds
+ * @return	void
+ */
 void TMR0_voidSetDelay_ms_using_CTC(u16 _del_ms)
 {
 #if TMR0_PRESCALER == 1
@@ -95,18 +126,24 @@ void TMR0_voidSetDelay_ms_using_CTC(u16 _del_ms)
 #endif
 }
 
-void TMR0_voidSetDutyCycle_using_FastPWM(u8 copy_u8_duty)
+/**
+ * TMR0_voidSetDutyCycle : Sets the duty cycle for Timer 0 (TMR0) in (Fast PWM or Phase Correct PWM)
+ * 						   and inverting or non-inverting mode
+ * @param	copy_u8_duty:  The desired duty cycle expressed as a percentage (0 to 100)
+ * @return	void
+ */void TMR0_voidSetDutyCycle(u8 copy_u8_duty)
 {
+#if TMR0_MODE == TMR0_FastPWM_MODE
 	if(copy_u8_duty <= 100)
 	{
-#if Fast_PWM_MODE == non_inverting
+	#if Fast_PWM_MODE == non_inverting
 		if(copy_u8_duty == 0){
 			_OCR0 = 0;
 		}
 		else{
 			_OCR0 = (((u16)copy_u8_duty * 256) / 100) -1;
 		}
-#elif Fast_PWM_MODE == inverting
+	#elif Fast_PWM_MODE == inverting
 		if(copy_u8_duty == 100){
 			_OCR0 = 0;
 		}
@@ -114,10 +151,53 @@ void TMR0_voidSetDutyCycle_using_FastPWM(u8 copy_u8_duty)
 			copy_u8_duty = 100 - copy_u8_duty;
 			_OCR0 = (((u16)copy_u8_duty * 256) / 100) -1;
 		}
-#endif
+	#endif	//Fast_PWM_MODE
+	}
+#elif TMR0_MODE == TMR0_Phase_Correct_PWM_MODE
+	if(copy_u8_duty <= 100)
+	{
+	#if Phase_correct_PWM_MODE == non_inverting
+	_OCR0 = (copy_u8_duty * 256) / 100;
+	#elif Phase_correct_PWM_MODE == inverting
+	copy_u8_duty = 100 - copy_u8_duty;
+	_OCR0 = (((u16)copy_u8_duty * 256) / 100) - 510;;
+	#endif	//Phase_Correct_PWM_MODE
+	}
+#endif // TMR0_MODE
+}
+
+
+
+/*********** Call Back Functions *********/
+/**
+ * TMR0_voidSendCallBack_OVF : Sets an overflow callback function for Timer 0 (TMR0)
+ * @param	PtrF: A pointer to the overflow callback function
+ * @return	void
+ */
+void TMR0_voidSendCallBack_OVF(void (*PtrF)(void))
+{
+	if(PtrF != NULL)
+	{
+		privatePTR_OV = PtrF;
 	}
 }
-/************** private implementation **************/
+
+/**
+ * TMR0_voidSendCallBack_OCM : Sets an output compare match callback function for Timer 0 (TMR0)
+ * @param	PtrF: A pointer to the output compare match callback function
+ * @return	void
+ */
+
+void TMR0_voidSendCallBack_OCM(void (*PtrF)(void))
+{
+	if(PtrF != NULL)
+	{
+		privatePTR_OC = PtrF;
+	}
+}
+
+/* ----------------- Section : Static "Private" Functions Declaration Implementation -----------------*/
+
 static void select_mode(u8 mode)
 {
 	switch(mode)
@@ -134,18 +214,24 @@ static void select_mode(u8 mode)
 		SET_BIT(_TCCR0, 3);
 		CLR_BIT(_TCCR0, 6);
 		break;
+	case Phase_Correct_PWM:
+		CLR_BIT(_TCCR0, 3);
+		SET_BIT(_TCCR0, 6);
+		break;
 	}
 }
 
+#if TMR0_MODE 	== TMR0_NORMAL_MODE
 static void Enable_OVI(void)
 {
 	SET_BIT(_TIMSK, 0);
 }
-
+#elif TMR0_MODE == TMR0_CTC_MODE
 static void Enable_OCI(void)
 {
 	SET_BIT(_TIMSK, 1);
 }
+#endif
 
 static void PrescalerValue_set(u16 value)
 {
@@ -179,15 +265,18 @@ static void PrescalerValue_set(u16 value)
 	}
 }
 
-static void TMR0_Compare_match_value_set(u8 value)
-{
-	_OCR0 = value;
-}
 
-/************* TMR0_ISR ***********/
 
-//NORMAL
+
+
+/* ----------------- Section : ISRs -----------------*/
+
+//NORMAL Mode ISR
 void __vector_11(void) __attribute__((signal));
+//CTC Mode ISR
+void __vector_10(void) __attribute__((signal));
+
+
 void __vector_11(void)
 {
 	static u16 count = 0;
@@ -204,8 +293,7 @@ void __vector_11(void)
 
 }
 
-//CTC
-void __vector_10(void) __attribute__((signal));
+
 void __vector_10(void)
 {
 	static u16 count = 0;

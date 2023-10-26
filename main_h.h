@@ -17,9 +17,8 @@
 
 Pin_ConfigType pins[] =
 	{
-		{Dio_PORTA, pin_4, STD_OUT},
-		{Dio_PORTA, pin_5, STD_OUT},
-		{Dio_PORTA, pin_6, STD_OUT},
+		{Dio_PORTB, pin_3, STD_OUT},
+		{Dio_PORTA, pin_5, STD_IN},
 		{-1}
 	};
 
