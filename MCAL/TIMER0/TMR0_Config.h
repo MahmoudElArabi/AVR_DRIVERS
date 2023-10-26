@@ -5,10 +5,10 @@
  *      Author: Mahmoud El Arabi
  */
 
-#include "TMR0_Private.h"
-
 #ifndef MCAL_TIMER0_TMR0_CONFIG_H_
 #define MCAL_TIMER0_TMR0_CONFIG_H_
+
+#include "TMR0_Private.h"
 
 // Configure TMR0 Mode    --> TMR0_NORMAL_MODE	TMR0_CTC_MODE	TMR0_FastPWM_MODE	TMR0_Phase_Correct_PWM_MODE
 #define TMR0_MODE					TMR0_Phase_Correct_PWM_MODE

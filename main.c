@@ -8,14 +8,14 @@
 
 #include "main_h.h"
 
-void ISR_NORMAL(void)
+void ISR_CTC(void)
 {
-	Dio_FlipChannel(PA_5);
+	Dio_FlipChannel(PA_4);
 }
 int main() {
 	Port_Init(pins);
 	GI_voidEnable();
-	TMR2_voidSendCallBack_OVF(ISR_NORMAL);
+	TMR2_voidSendCallBack_OCM(ISR_CTC);
 	TMR2_voidInit();
 	TMR2_voidStart();
 	while (1) {

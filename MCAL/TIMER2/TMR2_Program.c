@@ -16,13 +16,14 @@ static volatile u16 private_CTC_counter = 0;
 static void (*privatePTR_OV) (void) = NULL;
 static void (*privatePTR_OC) (void) = NULL;
 static void select_mode(u8 mode);
+
 #if TMR2_MODE 	== TMR2_NORMAL_MODE
 static void Enable_OVI2(void);
 #elif TMR2_MODE == TMR2_CTC_MODE
 static void Enable_OCI2(void);
-#endif
-static void PrescalerValue_set(u16 value);
+#endif	// TMR2_MODE
 
+static void PrescalerValue_set(u16 value);
 
 
 /* ----------------- Section : Software Interfaces Implementation -----------------*/
@@ -34,7 +35,7 @@ static void PrescalerValue_set(u16 value);
  */
 void TMR2_voidInit(void)
 {
-#if TMR2_MODE 	== TMR2_NORMAL_MODE
+#if TMR2_MODE 	==  TMR2_NORMAL_MODE
 	select_mode(Normal2);
 	Enable_OVI2();
 	TMR2_Preload_value_set(TMR2_PRELOAD);
@@ -68,7 +69,7 @@ void TMR2_voidInit(void)
 		SET_BIT(_TCCR2, 5);
 		break;
 	}
-#endif
+#endif	// TMR2_MODE
 }
 
 /**
@@ -313,7 +314,7 @@ void __vector_4(void)
 {
 	static u16 count = 0;
 	count ++;
-	if(count == private_CTC_counter)
+	if(count == 1500)
 	{
 		count = 0;
 		if(privatePTR_OC !=NULL)
