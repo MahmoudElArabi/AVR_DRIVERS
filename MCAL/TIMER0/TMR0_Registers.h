@@ -5,8 +5,8 @@
  *      Author: Mahmoud El Arabi
  */
 
-#ifndef MCAL_TIMER0_TMR0_REGISTER_H_
-#define MCAL_TIMER0_TMR0_REGISTER_H_
+#ifndef MCAL_TIMER0_TMR0_REGISTERS_H_
+#define MCAL_TIMER0_TMR0_REGISTERS_H_
 
 // Timer/Counter 0 Control Register
 #define _TCCR0 		(*((volatile unsigned char *)0x53))
@@ -19,4 +19,4 @@
 // Timer/Counter Interrupt Flag
 #define _TIFR      	(*((volatile unsigned char *)0x58))
 
-#endif /* MCAL_TIMER0_TMR0_REGISTER_H_ */
+#endif /* MCAL_TIMER0_TMR0_REGISTERS_H_ */

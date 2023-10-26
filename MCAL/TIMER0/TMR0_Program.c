@@ -16,9 +16,9 @@ static void (*privatePTR_OV) (void) = NULL;
 static void (*privatePTR_OC) (void) = NULL;
 static void select_mode(u8 mode);
 #if TMR0_MODE 	== TMR0_NORMAL_MODE
-static void Enable_OVI(void);
+static void Enable_OVI0(void);
 #elif TMR0_MODE == TMR0_CTC_MODE
-static void Enable_OCI(void);
+static void Enable_OCI0(void);
 #endif
 static void PrescalerValue_set(u16 value);
 
@@ -35,11 +35,11 @@ void TMR0_voidInit(void)
 {
 #if TMR0_MODE 	== TMR0_NORMAL_MODE
 	select_mode(Normal);
-	Enable_OVI();
+	Enable_OVI0();
 	TMR0_Preload_value_set(TMR0_PRELOAD);
 #elif TMR0_MODE == TMR0_CTC_MODE
 	select_mode(CTC);
-	Enable_OCI();
+	Enable_OCI0();
 	_OCR0 = (TMR0_OCR0_val);
 #elif TMR0_MODE == TMR0_FastPWM_MODE
 	select_mode(FastPWM);
@@ -222,12 +222,12 @@ static void select_mode(u8 mode)
 }
 
 #if TMR0_MODE 	== TMR0_NORMAL_MODE
-static void Enable_OVI(void)
+static void Enable_OVI0(void)
 {
 	SET_BIT(_TIMSK, 0);
 }
 #elif TMR0_MODE == TMR0_CTC_MODE
-static void Enable_OCI(void)
+static void Enable_OCI0(void)
 {
 	SET_BIT(_TIMSK, 1);
 }

@@ -14,11 +14,12 @@
 #include "MCAL/EXTI/EXTI_Interface.h"
 #include "MCAL/PORT/PORT_Interface.h"
 #include "MCAL/TIMER0/TMR0_Interface.h"
+#include "MCAL/TIMER2/TMR2_Interface.h"
 
 Pin_ConfigType pins[] =
 	{
 		{Dio_PORTB, pin_3, STD_OUT},
-		{Dio_PORTA, pin_5, STD_IN},
+		{Dio_PORTA, pin_5, STD_OUT},
 		{-1}
 	};
 

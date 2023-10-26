@@ -5,12 +5,12 @@
  *      Author: Mahmoud El Arabi
  */
 
-#ifndef MCAL_EXTI_EXTI_REGISTER_H_
-#define MCAL_EXTI_EXTI_REGISTER_H_
+#ifndef MCAL_EXTI_EXTI_REGISTERS_H_
+#define MCAL_EXTI_EXTI_REGISTERS_H_
 
 #define _GIFR 		(*((volatile unsigned char *)0x5A))
 #define _MCUCSR 	(*((volatile unsigned char *)0x54))
 #define _MCUCR 		(*((volatile unsigned char *)0x55))
 #define _GICR 		(*((volatile unsigned char *)0x5B))
 
-#endif /* MCAL_EXTI_EXTI_REGISTER_H_ */
+#endif /* MCAL_EXTI_EXTI_REGISTERS_H_ */

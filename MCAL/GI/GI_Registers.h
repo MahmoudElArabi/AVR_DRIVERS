@@ -5,10 +5,10 @@
  *      Author: Mahmoud El Arabi
  */
 
-#ifndef MCAL_GI_GI_REGISTER_H_
-#define MCAL_GI_GI_REGISTER_H_
+#ifndef MCAL_GI_GI_REGISTERS_H_
+#define MCAL_GI_GI_REGISTERS_H_
 
 #define _SREG 		(*((volatile unsigned char *)0x5F))
 #define GLE 		7
 
-#endif /* MCAL_GI_GI_REGISTER_H_ */
+#endif /* MCAL_GI_GI_REGISTERS_H_ */

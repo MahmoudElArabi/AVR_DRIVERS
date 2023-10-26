@@ -8,7 +8,7 @@
 /* ----------------- Section : includes -----------------*/
 
 #include "EXTI_interface.h"
-#include "EXTI_register.h"
+#include "EXTI_Registers.h"
 
 /* ----------------- Section : Static "Private" Functions / Functions pointers -----------------*/
 

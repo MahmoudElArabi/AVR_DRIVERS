@@ -8,21 +8,18 @@
 
 #include "main_h.h"
 
-
+void ISR_NORMAL(void)
+{
+	Dio_FlipChannel(PA_5);
+}
 int main() {
 	Port_Init(pins);
-	TMR0_voidInit();
-	TMR0_voidStart();
-	u8 local = 1;
-
+	GI_voidEnable();
+	TMR2_voidSendCallBack_OVF(ISR_NORMAL);
+	TMR2_voidInit();
+	TMR2_voidStart();
 	while (1) {
-		local++;
-		if(local == 100)
-		{
-			local = 0;
-		}
-		TMR0_voidSetDutyCycle(local);
-		_delay_ms(50);
+
 	}
 	return 0;
 }

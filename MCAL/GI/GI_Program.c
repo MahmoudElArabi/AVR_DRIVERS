@@ -8,7 +8,7 @@
 /* ----------------- Section : includes -----------------*/
 
 #include "GI_Interface.h"
-#include "GI_Register.h"
+#include "GI_Registers.h"
 
 
 /* ----------------- Section : Software Interfaces Implementation -----------------*/

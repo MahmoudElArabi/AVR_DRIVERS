@@ -13,7 +13,7 @@
 
 #include "../PORT/PORT_Interface.h"
 #include "TMR0_Config.h"
-#include "TMR0_Register.h"
+#include "TMR0_Registers.h"
 
 
 /* ----------------- Section : Data types Declarations -----------------*/
