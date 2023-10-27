@@ -5,24 +5,21 @@
  *      Author: Mahmoud El Arabi
  */
 
-
 #include "main_h.h"
 
-void ISR_CTC(void)
-{
-	Dio_FlipChannel(PA_4);
-}
+u8 key = 'T';
 int main() {
-	TMR2_voidSetDelay_ms_using_CTC(2000);
 	Port_Init(pins);
-	GI_voidEnable();
-	TMR2_voidSendCallBack_OCM(ISR_CTC);
-
-	TMR2_voidInit();
-
-	TMR2_voidStart();
-	while (1) {
-
+	Keypad_Init();
+	lcd4_Init();
+	while (1)
+	{
+		Keypad_Get_value(&key);
+		if (key!='T')
+		{
+			lcd4_disply_char(key);
+			key='T';
+		}
 	}
 	return 0;
 }

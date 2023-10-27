@@ -37,27 +37,47 @@ void Port_Init (Pin_ConfigType *pins_cfg)
 		{
 		case Dio_PORTA:
 			if((pins_cfg[i].Direction) == STD_OUT)
+			{
 				SET_BIT(_DDRA, pins_cfg[i].Pin);
+			}
 			else
+			{
 				CLR_BIT(_DDRA, pins_cfg[i].Pin);
+				SET_BIT(_PORTA, pins_cfg[i].Pin);
+			}
 			break;
 		case Dio_PORTB:
 			if((pins_cfg[i].Direction) == STD_OUT)
+			{
 				SET_BIT(_DDRB, pins_cfg[i].Pin);
+			}
 			else
+			{
 				CLR_BIT(_DDRB, pins_cfg[i].Pin);
+				SET_BIT(_PORTB, pins_cfg[i].Pin);
+			}
 			break;
 		case Dio_PORTC:
 			if((pins_cfg[i].Direction) == STD_OUT)
+			{
 				SET_BIT(_DDRC, pins_cfg[i].Pin);
+			}
 			else
+			{
 				CLR_BIT(_DDRC, pins_cfg[i].Pin);
+				SET_BIT(_PORTC, pins_cfg[i].Pin);
+			}
 			break;
 		case Dio_PORTD:
 			if((pins_cfg[i].Direction) == STD_OUT)
+			{
 				SET_BIT(_DDRD, pins_cfg[i].Pin);
+			}
 			else
+			{
 				CLR_BIT(_DDRD, pins_cfg[i].Pin);
+				SET_BIT(_PORTD, pins_cfg[i].Pin);
+			}
 			break;
 		default: break;
 		}

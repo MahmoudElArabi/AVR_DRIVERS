@@ -27,17 +27,6 @@ u8 current_pos = 0;
  */
 void lcd4_Init(void)
 {
-	Pin_ConfigType LCD_pins[] =
-	{
-			{Dio_PORTB, pin_0, STD_OUT },
-			{Dio_PORTB, pin_1, STD_OUT },
-			{Dio_PORTB, pin_2, STD_OUT },
-			{Dio_PORTB, pin_4, STD_OUT },
-			{Dio_PORTA, pin_2, STD_OUT },
-			{Dio_PORTA, pin_3, STD_OUT },
-			{-1}
-	};
-	Port_Init(LCD_pins);
 	_delay_ms(50);
 	LCD4_Command_Write(LCD_CURSOR_HOME);
 	LCD4_Command_Write(LCD_FUNCTION_SET_4_BIT_2_LINE_8_DOTS);	//LCD 4bit mode, 2 line

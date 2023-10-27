@@ -11,7 +11,7 @@
 #include "TMR0_Private.h"
 
 // Configure TMR0 Mode    --> TMR0_NORMAL_MODE	TMR0_CTC_MODE	TMR0_FastPWM_MODE	TMR0_Phase_Correct_PWM_MODE
-#define TMR0_MODE					TMR0_Phase_Correct_PWM_MODE
+#define TMR0_MODE					TMR0_FastPWM_MODE
 // Fast_PWM_MODE 		  --> inverting		or	non_inverting
 #define Fast_PWM_MODE				inverting
 // Phase_correct_PWM_MODE --> inverting		or	non_inverting
