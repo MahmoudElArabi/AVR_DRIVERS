@@ -23,8 +23,9 @@
 
 /******************* PORT Configuration *******************/
 Pin_ConfigType pins[] =	{
-			{Dio_PORTD, pin_0, STD_IN},
-			{Dio_PORTD, pin_1, STD_OUT},
+			{Dio_PORTB, pin_3, STD_OUT},
+			{Dio_PORTB, pin_5, STD_OUT},
+			{Dio_PORTB, pin_6, STD_OUT},
 
 /*************** 7_Segment ***************/
 //			{Dio_PORTB, pin_0, STD_OUT },
