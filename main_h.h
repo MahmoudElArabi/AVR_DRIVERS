@@ -19,12 +19,12 @@
 #include "MCAL/TIMER0/TMR0_Interface.h"
 #include "MCAL/TIMER2/TMR2_Interface.h"
 #include "MCAL/ADC/ADC_Interface.h"
+#include "MCAL/UART/UART_Interface.h"
 
 /******************* PORT Configuration *******************/
 Pin_ConfigType pins[] =	{
-			{Dio_PORTB, pin_3, STD_OUT},
-			{Dio_PORTB, pin_5, STD_OUT},
-			{Dio_PORTB, pin_6, STD_OUT},
+			{Dio_PORTD, pin_0, STD_IN},
+			{Dio_PORTD, pin_1, STD_OUT},
 
 /*************** 7_Segment ***************/
 //			{Dio_PORTB, pin_0, STD_OUT },

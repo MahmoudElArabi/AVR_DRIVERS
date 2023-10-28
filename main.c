@@ -10,14 +10,23 @@
 
 int main() {
 	Port_Init(pins);
-	lcd4_Init();
-	DCM_voidOn(0);
-	DCM_voidControlSpeed(100);
+	UART_Init();
+	UART_TransmitData('M');
+	_delay_ms(50);
+	UART_TransmitData('A');
+	_delay_ms(50);
+	UART_TransmitData('H');
+	_delay_ms(50);
+	UART_TransmitData('M');
+	_delay_ms(50);
+	UART_TransmitData('O');
+	_delay_ms(50);
+	UART_TransmitData('U');
+	_delay_ms(50);
+	UART_TransmitData('D');
 	while (1)
 	{
-		if(GET_BIT(_PINA, 5)){
-			DCM_voidOff();
-		}
+
 	}
 	return 0;
 }
