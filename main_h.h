@@ -18,7 +18,7 @@
 #include "MCAL/PORT/PORT_Interface.h"
 #include "MCAL/TIMER0/TMR0_Interface.h"
 #include "MCAL/TIMER2/TMR2_Interface.h"
-
+#include "MCAL/ADC/ADC_Interface.h"
 
 /******************* PORT Configuration *******************/
 Pin_ConfigType pins[] =	{
@@ -39,15 +39,15 @@ Pin_ConfigType pins[] =	{
 			{Dio_PORTA, pin_2, STD_OUT },
 			{Dio_PORTA, pin_3, STD_OUT },
 		//KEYPAD_INIT
-			{Dio_PORTD, pin_3, STD_IN},	// Column 1
-			{Dio_PORTD, pin_5, STD_IN},	// Column 2
-			{Dio_PORTD, pin_6, STD_IN},	// Column 3
-			{Dio_PORTD, pin_7, STD_IN},	// Column 4
-			{Dio_PORTC, pin_2, STD_OUT},// Row 1
-			{Dio_PORTC, pin_3, STD_OUT},// Row 2
-			{Dio_PORTC, pin_4, STD_OUT},// Row 3
-			{Dio_PORTC, pin_5, STD_OUT},// Row 4
-			{-1}
+//			{Dio_PORTD, pin_3, STD_IN},	// Column 1
+//			{Dio_PORTD, pin_5, STD_IN},	// Column 2
+//			{Dio_PORTD, pin_6, STD_IN},	// Column 3
+//			{Dio_PORTD, pin_7, STD_IN},	// Column 4
+//			{Dio_PORTC, pin_2, STD_OUT},// Row 1
+//			{Dio_PORTC, pin_3, STD_OUT},// Row 2
+//			{Dio_PORTC, pin_4, STD_OUT},// Row 3
+//			{Dio_PORTC, pin_5, STD_OUT},// Row 4
+//			{-1}
 	};
 
 #endif /* MAIN_H_H_ */

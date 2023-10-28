@@ -7,19 +7,21 @@
 
 #include "main_h.h"
 
-u8 key = 'T';
+
 int main() {
 	Port_Init(pins);
-	Keypad_Init();
 	lcd4_Init();
+
+	ADC_void_Init();
+
+	u16 retval = 0;
 	while (1)
 	{
-		Keypad_Get_value(&key);
-		if (key!='T')
-		{
-			lcd4_disply_char(key);
-			key='T';
-		}
+		retval = ADC_void_Read_CH(ADC1_SE);
+		lcd4_disply_num(retval);
+		_delay_ms(100);
+		lcd4_CLR();
 	}
 	return 0;
 }
+
