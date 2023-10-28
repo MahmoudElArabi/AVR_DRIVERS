@@ -9,12 +9,12 @@
 #define HAL_DCMOTOR_DCM_CONFIG_H_
 
 
-#define	TMR0			1
-#define	TMR1			2
-#define	TMR2			3
+#define DCM_CLOCK_WISE                  1
+#define DCM_COUNTER_CLOCK_WISE          2
 
-// Timer's mode must be configured in TMRn_Config file
-#define DCM_timer		TMR0
+#define PWM_PIN              			PB_3
+#define MOTOR_DIRECTION_PIN  			PB_5
+#define MOTOR_ENABLE_PIN     			PB_6
 
 
 #endif /* HAL_DCMOTOR_DCM_CONFIG_H_ */

@@ -12,12 +12,10 @@
 #include "../../MCAL/TIMER0/TMR0_Interface.h"
 #include "DCM_Config.h"
 
-/* ----------------- Section : Macro Declarations -----------------*/
-#define DCM_CLOCK_WISE                   1
-#define DCM_COUNTER_CLOCK_WISE           2
+
 
 /* ----------------- Section : Software Interfaces Declaration -----------------*/
-void DCM_voidInit(void);
+
 void DCM_voidOn          (u8 Copy_u8Direction);
 void DCM_voidControlSpeed(u8 Copy_u8Speed);
 void DCM_voidOff         (void);

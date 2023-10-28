@@ -13,9 +13,9 @@
 // Configure TMR2 Mode    --> TMR2_NORMAL_MODE	TMR2_CTC_MODE	TMR2_FastPWM_MODE	TMR2_Phase_Correct_PWM_MODE
 #define TMR2_MODE					TMR2_CTC_MODE
 // Fast_PWM_MODE 		  --> inverting		or	non_inverting
-#define Fast_PWM_MODE				inverting
+#define Fast_PWM_MODE2				inverting2
 // Phase_correct_PWM_MODE --> inverting		or	non_inverting
-#define Phase_correct_PWM_MODE		inverting
+#define Phase_correct_PWM_MODE2		inverting2
 
 #define TMR2_PRESCALER				64
 #define TMR2_PRELOAD				113

@@ -15,8 +15,8 @@
 #define TMR2_Phase_Correct_PWM_MODE		4
 
 /*Modes of (FastPWM & Phase_Correct_PWM)*/
-#define non_inverting					1
-#define inverting						2
+#define non_inverting2					1
+#define inverting2						2
 
 
 #endif /* MCAL_TIMER2_TMR2_PRIVATE_H_ */

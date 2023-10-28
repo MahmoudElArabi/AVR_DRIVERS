@@ -23,4 +23,5 @@
 void ADC_void_Init(void);
 u16 ADC_void_Read_CH(u8 u8_Copychannel);
 
+
 #endif /* MCAL_ADC_ADC_INTERFACE_H_ */

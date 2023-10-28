@@ -45,26 +45,26 @@ void TMR2_voidInit(void)
 	_OCR2 = (TMR2_OCR2_val);
 #elif TMR2_MODE == TMR2_FastPWM_MODE
 	select_mode(FastPWM2);
-	switch(Fast_PWM_MODE)
+	switch(Fast_PWM_MODE2)
 	{
-	case non_inverting:
+	case non_inverting2:
 		CLR_BIT(_TCCR2, 4);
 		SET_BIT(_TCCR2, 5);
 		break;
-	case inverting:
+	case inverting2:
 		SET_BIT(_TCCR2, 4);
 		SET_BIT(_TCCR2, 5);
 		break;
 	}
-#elif TMR2_MODE == TMR2_Phase_Correct_PWM_MODE
+#elif TMR2_MODE == TMR2_Phase_correct_PWM_MODE2
 	select_mode(Phase_Correct_PWM2);
-	switch(Phase_correct_PWM_MODE)
+	switch(Phase_correct_PWM_MODE2)
 	{
-	case non_inverting:
+	case non_inverting2:
 		CLR_BIT(_TCCR2, 4);
 		SET_BIT(_TCCR2, 5);
 		break;
-	case inverting:
+	case inverting2:
 		SET_BIT(_TCCR2, 4);
 		SET_BIT(_TCCR2, 5);
 		break;
@@ -141,14 +141,14 @@ void TMR2_voidSetDelay_ms_using_CTC(u16 _del_ms)
 #if TMR2_MODE == TMR2_FastPWM_MODE
 	if(copy_u8_duty <= 100)
 	{
-	#if Fast_PWM_MODE == non_inverting
+	#if Fast_PWM_MODE2 == non_inverting2
 		if(copy_u8_duty == 0){
 			_OCR2 = 0;
 		}
 		else{
 			_OCR2 = (((u16)copy_u8_duty * 256) / 100) -1;
 		}
-	#elif Fast_PWM_MODE == inverting
+	#elif Fast_PWM_MODE2 == inverting2
 		if(copy_u8_duty == 100){
 			_OCR2 = 0;
 		}
@@ -156,17 +156,17 @@ void TMR2_voidSetDelay_ms_using_CTC(u16 _del_ms)
 			copy_u8_duty = 100 - copy_u8_duty;
 			_OCR2 = (((u16)copy_u8_duty * 256) / 100) -1;
 		}
-	#endif	//Fast_PWM_MODE
+	#endif	//Fast_PWM_MODE2
 	}
-#elif TMR2_MODE == TMR2_Phase_Correct_PWM_MODE
+#elif TMR2_MODE == TMR2_Phase_correct_PWM_MODE2
 	if(copy_u8_duty <= 100)
 	{
-	#if Phase_correct_PWM_MODE == non_inverting
+	#if Phase_correct_PWM_MODE2 == non_inverting2
 	_OCR2 = (copy_u8_duty * 256) / 100;
-	#elif Phase_correct_PWM_MODE == inverting
+	#elif Phase_correct_PWM_MODE2 == inverting2
 	copy_u8_duty = 100 - copy_u8_duty;
 	_OCR2 = (((u16)copy_u8_duty * 256) / 100) - 510;;
-	#endif	//Phase_Correct_PWM_MODE
+	#endif	//Phase_correct_PWM_MODE2
 	}
 #endif // TMR2_MODE
 }
