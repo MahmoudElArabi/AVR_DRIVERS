@@ -24,14 +24,14 @@
 
 /******************* PORT Configuration *******************/
 Pin_ConfigType pins[] =	{
-//			{Dio_PORTA, pin_0, STD_OUT},
-//			{Dio_PORTA, pin_1, STD_OUT},
-//			{Dio_PORTA, pin_2, STD_OUT},
-//			{Dio_PORTA, pin_3, STD_OUT},
-//			{Dio_PORTA, pin_4, STD_OUT},
-//			{Dio_PORTA, pin_5, STD_OUT},
-//			{Dio_PORTA, pin_6, STD_OUT},
-//			{Dio_PORTA, pin_7, STD_OUT},
+			{Dio_PORTA, pin_0, STD_OUT},
+			{Dio_PORTA, pin_1, STD_OUT},
+			{Dio_PORTA, pin_2, STD_OUT},
+			{Dio_PORTA, pin_3, STD_OUT},
+			{Dio_PORTA, pin_4, STD_OUT},
+			{Dio_PORTA, pin_5, STD_OUT},
+			{Dio_PORTA, pin_6, STD_OUT},
+			{Dio_PORTA, pin_7, STD_OUT},
 
 //			{Dio_PORTB, pin_0, STD_OUT},
 //			{Dio_PORTB, pin_1, STD_OUT},
