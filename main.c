@@ -7,29 +7,18 @@
 
 #include "main_h.h"
 
-void ISR_CTC(void)
-{
-	Dio_FlipChannel(PA_4);
-}
 int main() {
 	Port_Init(pins);
-
-	TMR2_voidSetDelay_ms_using_CTC(2000);
-	GI_voidEnable();
-	TMR2_voidSendCallBack_OCM(ISR_CTC);
-
-	TMR2_voidInit();
-
-	TMR2_voidStart();
-
-	u8 i =0;
+	TMR1_voidInit();
+	TMR1_voidStart();
 	while (1)
 	{
-		TMR2_voidSetDutyCycle(i);
-		_delay_ms(50);
-		i++;
-		if (i == 100)
-			i = 0;
+	TMR1_voidSetDuty_Mode14(5);		//-90
+	_delay_ms(1000);
+	TMR1_voidSetDuty_Mode14(7.5);	//0
+	_delay_ms(1000);
+	TMR1_voidSetDuty_Mode14(10);	//90
+	_delay_ms(1000);
 	}
 	return 0;
 }

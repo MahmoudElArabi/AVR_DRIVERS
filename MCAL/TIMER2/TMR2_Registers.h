@@ -19,5 +19,4 @@
 // Timer/Counter Interrupt Flag
 #define _TIFR      	(*((volatile unsigned char *)0x58))
 
-
 #endif /* MCAL_TIMER2_TMR2_REGISTERS_H_ */

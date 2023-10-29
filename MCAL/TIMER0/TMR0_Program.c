@@ -131,7 +131,8 @@ void TMR0_voidSetDelay_ms_using_CTC(u16 _del_ms)
  * 						   and inverting or non-inverting mode
  * @param	copy_u8_duty:  The desired duty cycle expressed as a percentage (0 to 100)
  * @return	void
- */void TMR0_voidSetDutyCycle(u8 copy_u8_duty)
+ */
+void TMR0_voidSetDutyCycle(u8 copy_u8_duty)
 {
 #if TMR0_MODE == TMR0_FastPWM_MODE
 	if(copy_u8_duty <= 100)
