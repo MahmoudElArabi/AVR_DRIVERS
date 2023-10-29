@@ -23,9 +23,41 @@
 
 /******************* PORT Configuration *******************/
 Pin_ConfigType pins[] =	{
-			{Dio_PORTB, pin_3, STD_OUT},
-			{Dio_PORTB, pin_5, STD_OUT},
-			{Dio_PORTB, pin_6, STD_OUT},
+//			{Dio_PORTA, pin_0, STD_OUT},
+//			{Dio_PORTA, pin_1, STD_OUT},
+//			{Dio_PORTA, pin_2, STD_OUT},
+//			{Dio_PORTA, pin_3, STD_OUT},
+			{Dio_PORTA, pin_4, STD_OUT},
+//			{Dio_PORTA, pin_5, STD_OUT},
+			{Dio_PORTA, pin_6, STD_OUT},
+//			{Dio_PORTA, pin_7, STD_OUT},
+
+//			{Dio_PORTB, pin_0, STD_OUT},
+//			{Dio_PORTB, pin_1, STD_OUT},
+//			{Dio_PORTB, pin_2, STD_OUT},
+//			{Dio_PORTB, pin_3, STD_OUT},
+//			{Dio_PORTB, pin_4, STD_OUT},
+//			{Dio_PORTB, pin_5, STD_OUT},
+//			{Dio_PORTB, pin_6, STD_OUT},
+			{Dio_PORTB, pin_7, STD_OUT},
+
+//			{Dio_PORTC, pin_0, STD_OUT},
+//			{Dio_PORTC, pin_1, STD_OUT},
+//			{Dio_PORTC, pin_2, STD_OUT},
+//			{Dio_PORTC, pin_3, STD_OUT},
+//			{Dio_PORTC, pin_4, STD_OUT},
+//			{Dio_PORTC, pin_5, STD_OUT},
+//			{Dio_PORTC, pin_6, STD_OUT},
+//			{Dio_PORTC, pin_7, STD_OUT},
+
+//			{Dio_PORTD, pin_0, STD_OUT},
+//			{Dio_PORTD, pin_1, STD_OUT},
+//			{Dio_PORTD, pin_2, STD_OUT},
+//			{Dio_PORTD, pin_3, STD_OUT},
+//			{Dio_PORTD, pin_4, STD_OUT},
+//			{Dio_PORTD, pin_5, STD_OUT},
+//			{Dio_PORTD, pin_6, STD_OUT},
+			{Dio_PORTD, pin_7, STD_OUT},
 
 /*************** 7_Segment ***************/
 //			{Dio_PORTB, pin_0, STD_OUT },
@@ -38,12 +70,12 @@ Pin_ConfigType pins[] =	{
 //			{Dio_PORTB, pin_6, STD_OUT },
 
 /*************** LCD ***************/
-			{Dio_PORTB, pin_0, STD_OUT },
-			{Dio_PORTB, pin_1, STD_OUT },
-			{Dio_PORTB, pin_2, STD_OUT },
-			{Dio_PORTB, pin_4, STD_OUT },
-			{Dio_PORTA, pin_2, STD_OUT },
-			{Dio_PORTA, pin_3, STD_OUT },
+//			{Dio_PORTB, pin_0, STD_OUT },
+//			{Dio_PORTB, pin_1, STD_OUT },
+//			{Dio_PORTB, pin_2, STD_OUT },
+//			{Dio_PORTB, pin_4, STD_OUT },
+//			{Dio_PORTA, pin_2, STD_OUT },
+//			{Dio_PORTA, pin_3, STD_OUT },
 
 /*************** KEYPAD ***************/
 //			{Dio_PORTD, pin_3, STD_IN},	// Column 1

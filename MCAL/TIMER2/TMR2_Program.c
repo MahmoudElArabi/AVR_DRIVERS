@@ -11,7 +11,7 @@
 #include "TMR2_Interface.h"
 
 /* ----------------- Section : Static "Private" Functions / Functions pointers -----------------*/
-static volatile u16 private_CTC_counter = 0;
+static u16 private_CTC_counter = 0;
 
 static void (*privatePTR_OV) (void) = NULL;
 static void (*privatePTR_OC) (void) = NULL;
@@ -115,19 +115,19 @@ void TMR2_Preload_value_set(u8 value)
 void TMR2_voidSetDelay_ms_using_CTC(u16 _del_ms)
 {
 #if   TMR2_PRESCALER == 1
-	private_CTC_counter = (_del_ms*1000) / ((TMR2_OCR2_val + 1) * 0.0625);
+	private_CTC_counter = ((u32)_del_ms*1000) / ((TMR2_OCR2_val + 1) * 0.0625);
 #elif TMR2_PRESCALER == 8
-	private_CTC_counter = (_del_ms*1000) / ((TMR2_OCR2_val + 1) * 0.5);
+	private_CTC_counter = ((u32)_del_ms*1000) / ((TMR2_OCR2_val + 1) * 0.5);
 #elif TMR2_PRESCALER == 32
-	private_CTC_counter = (_del_ms*1000) / ((TMR2_OCR2_val + 1) * 2);
+	private_CTC_counter = ((u32)_del_ms*1000) / ((TMR2_OCR2_val + 1) * 2);
 #elif TMR2_PRESCALER == 64
-	private_CTC_counter = (_del_ms*1000) / ((TMR2_OCR2_val + 1) * 4);
+	private_CTC_counter = ((u32)_del_ms*1000) / ((TMR2_OCR2_val + 1) * 4);
 #elif TMR2_PRESCALER == 128
-	private_CTC_counter = (_del_ms*1000) / ((TMR2_OCR2_val + 1) * 8);
+	private_CTC_counter = ((u32)_del_ms*1000) / ((TMR2_OCR2_val + 1) * 8);
 #elif TMR2_PRESCALER == 256
-	private_CTC_counter = (_del_ms*1000) / ((TMR2_OCR2_val + 1) * 16);
+	private_CTC_counter = ((u32)_del_ms*1000) / ((TMR2_OCR2_val + 1) * 16);
 #elif TMR2_PRESCALER == 1024
-	private_CTC_counter = (_del_ms*1000) / ((TMR2_OCR2_val + 1) * 64);
+	private_CTC_counter = ((u32)_del_ms*1000) / ((TMR2_OCR2_val + 1) * 64);
 #endif
 }
 
@@ -165,12 +165,11 @@ void TMR2_voidSetDelay_ms_using_CTC(u16 _del_ms)
 	_OCR2 = (copy_u8_duty * 256) / 100;
 	#elif Phase_correct_PWM_MODE2 == inverting2
 	copy_u8_duty = 100 - copy_u8_duty;
-	_OCR2 = (((u16)copy_u8_duty * 256) / 100) - 510;;
+	_OCR2 = (((u16)copy_u8_duty * 256) / 100) - 510;
 	#endif	//Phase_correct_PWM_MODE2
 	}
 #endif // TMR2_MODE
 }
-
 
 
 /*********** Call Back Functions *********/
@@ -205,6 +204,7 @@ void TMR2_voidSendCallBack_OCM(void (*PtrF)(void))
 }
 
 #endif	//TMR2_MODE
+
 /* ----------------- Section : Static "Private" Functions Declaration Implementation -----------------*/
 
 static void select_mode(u8 mode)
@@ -317,7 +317,7 @@ void __vector_4(void)
 {
 	static u16 count = 0;
 	count ++;
-	if(count == 1500)
+	if(count == private_CTC_counter)
 	{
 		count = 0;
 		if(privatePTR_OC !=NULL)

@@ -8,11 +8,11 @@
 #ifndef MCAL_TIMER2_TMR2_REGISTERS_H_
 #define MCAL_TIMER2_TMR2_REGISTERS_H_
 
-// Timer/Counter 0 Control Register
+// Timer/Counter 2 Control Register
 #define _TCCR2 		(*((volatile unsigned char *)0x45))
 // Timer/Counter 2 Register
 #define _TCNT2 		(*((volatile unsigned char *)0x44))
-// Output Compare Register 0
+// Output Compare Register 2
 #define _OCR2 		(*((volatile unsigned char *)0x43))
 // Timer/Counter Interrupt Mask
 #define _TIMSK     	(*((volatile unsigned char *)0x59))
