@@ -14,7 +14,6 @@
 
 static void LCD_Data_write(u8 data);
 static void LCD4_Command_Write(u8 command);
-static void lcd4_set_cursor(u8 row, u8 coul);
 
 u8 current_pos = 0;
 
@@ -152,7 +151,25 @@ void lcd4_disply_CustomCharacter(u8 row, u8 col, u8* CustomCharacter, u8 MemPos)
 	lcd4_disply_char_at_X_Y(MemPos, row, col);
 }
 
-
+void lcd4_set_cursor(u8 row, u8 coul){
+    coul--;
+    switch (row){
+        case ROW1:
+            LCD4_Command_Write(0x80+coul);
+        break;
+        case ROW2:
+            LCD4_Command_Write(0xC0+coul);
+        break;
+        case ROW3:
+            LCD4_Command_Write(0x94+coul);
+        break;
+        case ROW4:
+            LCD4_Command_Write(0xD4+coul);
+        break;
+        default:
+        	break;
+    }
+}
 /* ----------------- Section : Static "Private" Functions Declaration Implementation -----------------*/
 
 static void LCD_Data_write(u8 data)
@@ -201,22 +218,3 @@ static void LCD4_Command_Write(u8 command)
 	_delay_ms(1);
 }
 
-static void lcd4_set_cursor(u8 row, u8 coul){
-    coul--;
-    switch (row){
-        case ROW1:
-            LCD4_Command_Write(0x80+coul);
-        break;
-        case ROW2:
-            LCD4_Command_Write(0xC0+coul);
-        break;
-        case ROW3:
-            LCD4_Command_Write(0x94+coul);
-        break;
-        case ROW4:
-            LCD4_Command_Write(0xD4+coul);
-        break;
-        default:
-        	break;
-    }
-}

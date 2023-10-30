@@ -151,4 +151,6 @@ void lcd4_disply_num (u16 num);
  */
 void lcd4_disply_CustomCharacter(u8 row, u8 col, u8* CustomCharacter, u8 MemoryPos);
 
+
+void lcd4_set_cursor(u8 row, u8 coul);
 #endif /* HAL_7SEGMENTS_LCD_H_ */
