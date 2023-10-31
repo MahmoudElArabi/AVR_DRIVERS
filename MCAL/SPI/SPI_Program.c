@@ -10,6 +10,9 @@
 #include "SPI_interface.h"
 
 
+/* ----------------- Section : STATICS -----------------*/
+static void(*Private_pCallback)(u8) = NULL;
+
 /* ----------------- Section : Software Interfaces Implementation -----------------*/
 void SPI_voidInit(void)
 {
@@ -34,7 +37,7 @@ void SPI_voidInit(void)
 	SET_BIT(_SPCR, 6);
 }
 
-void SPI_u8Transeive(u8 copy_u8_TX_data, u8 * copy_u8_RX_data)
+void SPI_voidTranseive(u8 copy_u8_TX_data, u8 * copy_u8_RX_data)
 {
 	if (copy_u8_RX_data != NULL)
 	{
@@ -48,4 +51,31 @@ void SPI_u8Transeive(u8 copy_u8_TX_data, u8 * copy_u8_RX_data)
 		return;
 	}
 }
+
+void SPI_voidTransmit_Async(u8 copy_u8_TX_data, void(*PtrFunc)(u8 copy_u8_RX_data))
+{
+	if (PtrFunc != NULL)
+	{
+		// Enable SPI Interrupt
+		SET_BIT(_SPCR, 7);
+
+		Private_pCallback = PtrFunc;
+		while(GET_BIT(_SPSR, 6));	// To prevent collision (Writing in buffer while still have the data to be sent
+		_SPDR = copy_u8_TX_data;	// write buffer >> Data register
+	}
+	else
+	{
+
+	}
+}
+
 /* ----------------- Section : ISRs -----------------*/
+void __vector_12(void) __attribute__((signal));
+
+void __vector_12(void)
+{
+	if(Private_pCallback)
+	{
+		Private_pCallback(_SPDR);
+	}
+}
