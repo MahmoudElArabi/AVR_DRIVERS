@@ -72,6 +72,11 @@ void lcd4_disply_char (const u8 character)
 	{
 		lcd4_set_cursor(4, 1);
 	}
+	else if (current_pos == 80)
+	{
+		lcd4_set_cursor(1, 1);
+		current_pos = 0;
+	}
 	LCD_Data_write(character);
 	current_pos ++;
 }
@@ -170,6 +175,13 @@ void lcd4_set_cursor(u8 row, u8 coul){
         break;
         default:
         	break;
+    }
+}
+
+void displayTextAnimated(const char *text) {
+    for (int i = 0; text[i] != '\0'; i++) {
+        lcd4_disply_char(text[i]);
+        _delay_ms(20); // Adjust the delay as needed
     }
 }
 /* ----------------- Section : Static "Private" Functions Declaration Implementation -----------------*/

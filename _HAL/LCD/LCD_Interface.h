@@ -151,4 +151,6 @@ void lcd4_disply_CustomCharacter(u8 row, u8 col, u8* CustomCharacter, u8 MemoryP
 
 
 void lcd4_set_cursor(u8 row, u8 coul);
+
+void displayTextAnimated(const char *text) ;
 #endif /* HAL_7SEGMENTS_LCD_H_ */
