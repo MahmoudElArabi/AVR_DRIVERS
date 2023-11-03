@@ -45,7 +45,6 @@ void TWI_voidSendStartCondition(void)
 	while(0 == GET_BIT(_TWCR, _TWINT));
 	// Check ACK is Positive
 	while(STATUS_VALUE != Start_Condition_ACK);
-
 }
 
 void TWI_voidSendStopCondition(void)
@@ -124,4 +123,10 @@ void TWI_voidReadMasterDataByte(u8 *copy_u8PtrData)
 	}
 }
 
-/* ----------------- Section : Static "Private" Functions Declaration Implementation -----------------*/
+void TWI_voidSendNACK(void)
+{
+    // Clear Start condition Flag
+    CLR_BIT(_TWCR, _TWEA);
+    SET_BIT(_TWCR, _TWINT);  // Clear the TWINT Flag
+    while (0 == GET_BIT(_TWCR, _TWINT));
+}

@@ -17,6 +17,7 @@
 #include "../_HAL/KEYPAD/KEYPAD_Interface.h"
 #include "../_HAL/LCD/LCD_Interface.h"
 #include "../_HAL/SERVO/SRVM_Interface.h"
+#include "../_HAL/EXT_EEPROM/EXT_EEPROM_Interface.h"
 
 #include "../_MCAL/DIO/DIO_Interface.h"
 #include "../_MCAL/PORT/PORT_Interface.h"
@@ -66,7 +67,7 @@ Pin_ConfigType pins[] =	{
 //			{Dio_PORTD, pin_2, STD_OUT},	// INT0
 //			{Dio_PORTD, pin_3, STD_OUT},	// INT1
 //			{Dio_PORTD, pin_4, STD_OUT},	// OC1B
-			{Dio_PORTD, pin_5, STD_OUT},	// OC1A
+//			{Dio_PORTD, pin_5, STD_OUT},	// OC1A
 //			{Dio_PORTD, pin_6, STD_OUT},	// ICP
 //			{Dio_PORTD, pin_7, STD_OUT},	// OC2
 
@@ -81,12 +82,12 @@ Pin_ConfigType pins[] =	{
 //			{Dio_PORTB, pin_6, STD_OUT },
 
 /*************** LCD 4 BITS ***************/
-//			{Dio_PORTB, pin_0, STD_OUT },
-//			{Dio_PORTB, pin_1, STD_OUT },
-//			{Dio_PORTB, pin_2, STD_OUT },
-//			{Dio_PORTB, pin_4, STD_OUT },
-//			{Dio_PORTA, pin_2, STD_OUT },
-//			{Dio_PORTA, pin_3, STD_OUT },
+			{Dio_PORTB, pin_0, STD_OUT },
+			{Dio_PORTB, pin_1, STD_OUT },
+			{Dio_PORTB, pin_2, STD_OUT },
+			{Dio_PORTB, pin_4, STD_OUT },
+			{Dio_PORTA, pin_2, STD_OUT },
+			{Dio_PORTA, pin_3, STD_OUT },
 
 /*************** KEYPAD ***************/
 //			{Dio_PORTC, pin_5, STD_OUT},	// Row 1

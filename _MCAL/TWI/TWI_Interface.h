@@ -39,6 +39,7 @@ void TWI_voidSendSlaveAdd_ReadRequest(u8 copy_u8SlaveAddress);
 void TWI_voidWriteMasterDataByte(u8 copy_u8Data);
 void TWI_voidReadMasterDataByte(u8 *copy_u8PtrData);
 
+void TWI_voidSendNACK(void);
 //Slave APIs
 
 #endif /* MCAL_TWI_TWI_INTERFACE_H_ */
