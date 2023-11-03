@@ -50,6 +50,7 @@ void EEPROM_voidRead_Byte(u16 copy_u16WordAdd, u8 *copy_u8PtrReceivedData)
 	}
 }
 
+
 void EEPROM_voidWrite_Page(u16 copy_u16WordAdd, u8 *copy_u8Data, u8 copy_u8Size)
 {
 
@@ -60,9 +61,35 @@ void EEPROM_voidWrite_Page(u16 copy_u16WordAdd, u8 *copy_u8Data, u8 copy_u8Size)
 	TWI_voidWriteMasterDataByte((u8)copy_u16WordAdd);
 	for (int i = 0; i <copy_u8Size ; i++ )
 		{
-		TWI_voidWriteMasterDataByte(copy_u8Data[i]);
+			TWI_voidWriteMasterDataByte(copy_u8Data[i]);
 		}
 
 	TWI_voidSendStopCondition();
 	_delay_ms(5);	// delay to eeprom to store the data
 }
+
+void EEPROM_voidRead_Page(u16 copy_u16WordAdd, u8 *copy_u8PtrReceivedData, u8 copy_u8Size)
+{
+    u8 local_u8Add = (copy_u16WordAdd >> 8) | EEPROM_FIXED_ADDRESS;
+    TWI_voidSendStartCondition();
+    TWI_voidSendSlaveAdd_WriteRequest(local_u8Add);
+    TWI_voidWriteMasterDataByte((u8)copy_u16WordAdd);
+
+    TWI_voidSendReapeatedStartCondition();
+
+    TWI_voidSendSlaveAdd_ReadRequest(local_u8Add);
+
+    for (int i = 0; i < copy_u8Size; i++)
+    {
+        TWI_voidReadMasterDataByte(&copy_u8PtrReceivedData[i]);
+    }
+    TWI_voidSendStopCondition();
+
+    _delay_ms(5);  // Delay for EEPROM to store the data
+}
+
+
+
+
+
+

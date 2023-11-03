@@ -123,10 +123,11 @@ void TWI_voidReadMasterDataByte(u8 *copy_u8PtrData)
 	}
 }
 
-void TWI_voidSendNACK(void)
-{
-    // Clear Start condition Flag
-    CLR_BIT(_TWCR, _TWEA);
-    SET_BIT(_TWCR, _TWINT);  // Clear the TWINT Flag
-    while (0 == GET_BIT(_TWCR, _TWINT));
+void TWI_send_NACK(void) {
+    // Clear the TWEA (TWI Enable Acknowledge Bit) to send a NACK
+    _TWCR = (1 << _TWINT) | (1 << _TWEN);
+
+    // Wait for the TWI operation to complete
+    while (!(_TWCR & (1 << _TWINT)));
+
 }
