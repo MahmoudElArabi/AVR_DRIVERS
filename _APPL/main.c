@@ -17,7 +17,6 @@ int main() {
 	Keypad_Init();
 	EEPROM_Init();
 
-	Dio_WriteChannel(PB_7, 0);
 	u8 receiveddata = 0;
 	u8 arrsend[4] = {0};
 	u8 received[4] ={0};
@@ -66,6 +65,7 @@ int main() {
 				}
 				lcd4_CLR();
 				EEPROM_voidRead_Page(0x50 , received, 4);
+
 
 				if ((received[0] == arrsend[0]) && (received[1] == arrsend[1])
 						&& (received[2] == arrsend[2])

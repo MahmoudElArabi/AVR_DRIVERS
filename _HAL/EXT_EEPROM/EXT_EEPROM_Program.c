@@ -7,6 +7,8 @@
 
 /* ----------------- Section : includes -----------------*/
 #include "EXT_EEPROM_Private.h"
+#include "../../_MCAL/TWI/TWI_Registers.h"
+#include "../../_MY_LIBS/BIT_MATH.h"
 #include "EXT_EEPROM_Interface.h"
 #include "../../_MCAL/TWI/TWI_Interface.h"
 #include <util/delay.h>
@@ -33,6 +35,7 @@ void EEPROM_voidRead_Byte(u16 copy_u16WordAdd, u8 *copy_u8PtrReceivedData)
 {
 	if(copy_u8PtrReceivedData != NULL)
 	{
+		CLR_BIT(_TWCR, _TWEA);
 		u8 local_u8Add = (copy_u16WordAdd >> 8) | EEPROM_FIXED_ADDRESS ;
 		TWI_voidSendStartCondition();
 		TWI_voidSendSlaveAdd_WriteRequest(local_u8Add);
@@ -70,6 +73,7 @@ void EEPROM_voidWrite_Page(u16 copy_u16WordAdd, u8 *copy_u8Data, u8 copy_u8Size)
 
 void EEPROM_voidRead_Page(u16 copy_u16WordAdd, u8 *copy_u8PtrReceivedData, u8 copy_u8Size)
 {
+	SET_BIT(_TWCR, _TWEA);
     u8 local_u8Add = (copy_u16WordAdd >> 8) | EEPROM_FIXED_ADDRESS;
     TWI_voidSendStartCondition();
     TWI_voidSendSlaveAdd_WriteRequest(local_u8Add);
@@ -81,7 +85,11 @@ void EEPROM_voidRead_Page(u16 copy_u16WordAdd, u8 *copy_u8PtrReceivedData, u8 co
 
     for (int i = 0; i < copy_u8Size; i++)
     {
-        TWI_voidReadMasterDataByte(&copy_u8PtrReceivedData[i]);
+    	TWI_voidReadMasterDataByteACK(&copy_u8PtrReceivedData[i]);
+    	if(i == copy_u8Size -1)
+    	{
+    		CLR_BIT(_TWCR, _TWEA);
+    	}
     }
     TWI_voidSendStopCondition();
 

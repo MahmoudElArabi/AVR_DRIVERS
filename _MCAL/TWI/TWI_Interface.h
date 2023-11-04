@@ -40,6 +40,7 @@ void TWI_voidWriteMasterDataByte(u8 copy_u8Data);
 void TWI_voidReadMasterDataByte(u8 *copy_u8PtrData);
 
 void TWI_send_NACK(void);
+void TWI_voidReadMasterDataByteACK(u8 *copy_u8PtrData);
 
 //Slave APIs
 

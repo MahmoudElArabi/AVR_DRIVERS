@@ -118,16 +118,21 @@ void TWI_voidReadMasterDataByte(u8 *copy_u8PtrData)
 		SET_BIT(_TWCR, _TWINT);	//Clear the TWINT Flag
 		while(0 == GET_BIT(_TWCR, _TWINT));
 		// Check ACK is Positive
-		while(STATUS_VALUE != Master_Data_Receive_ACK);
+//		while(STATUS_VALUE != Master_Data_Receive_ACK);
 		*copy_u8PtrData = _TWDR;
 	}
 }
 
-void TWI_send_NACK(void) {
-    // Clear the TWEA (TWI Enable Acknowledge Bit) to send a NACK
-    _TWCR = (1 << _TWINT) | (1 << _TWEN);
 
-    // Wait for the TWI operation to complete
-    while (!(_TWCR & (1 << _TWINT)));
-
+void TWI_voidReadMasterDataByteACK(u8 *copy_u8PtrData)
+{
+	if (copy_u8PtrData != NULL)
+	{
+		// Clear Start condition Flag
+		SET_BIT(_TWCR, _TWINT);	//Clear the TWINT Flag
+		while(0 == GET_BIT(_TWCR, _TWINT));
+		// Check ACK is Positive
+		while(STATUS_VALUE != Master_Data_Receive_ACK);
+		*copy_u8PtrData = _TWDR;
+	}
 }
