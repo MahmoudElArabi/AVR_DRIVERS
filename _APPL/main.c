@@ -49,8 +49,10 @@ int main() {
 	}
 
 	else {
-		lcd4_disply_string((u8*) "Welcome back! Please Enter your password:");
 
+		lcd4_disply_string((u8*) "Welcome back! Please Enter your password:");
+		u8 trial = 3;
+		label:
 		while (1) {
 			Keypad_Get_value(&key);
 			if (key != 'T' && key != '#') {
@@ -79,7 +81,17 @@ int main() {
 					lcd4_disply_string((u8*) "DOOR  DOOR CLOSED ");
 				}
 				else {
-					lcd4_disply_string((u8*) "WRONG!!");
+					lcd4_CLR();
+					lcd4_disply_string((u8*) "WRONG!! remain");
+					trial--;
+					lcd4_disply_num(trial);
+					if (trial == 0)
+					{
+						Dio_WriteChannel(PC_7, 1);
+						Dio_WriteChannel(PB_7, 1);
+						_delay_ms(500000);
+					}
+					goto label;
 				}
 			}
 		}

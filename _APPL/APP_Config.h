@@ -43,7 +43,7 @@ Pin_ConfigType pins[] =	{
 //			{Dio_PORTA, pin_4, STD_OUT},	// ADC4
 //			{Dio_PORTA, pin_5, STD_OUT},	// ADC5
 //			{Dio_PORTA, pin_6, STD_OUT},	// ADC6
-//			{Dio_PORTA, pin_7, STD_OUT},	// ADC7
+			{Dio_PORTA, pin_7, STD_OUT},	// ADC7
 /** PORT B **/
 //			{Dio_PORTB, pin_0, STD_OUT},	// XCK/T0
 //			{Dio_PORTB, pin_1, STD_OUT},	// T1
@@ -61,7 +61,7 @@ Pin_ConfigType pins[] =	{
 //			{Dio_PORTC, pin_4, STD_OUT},	// TDO
 //			{Dio_PORTC, pin_5, STD_OUT},	// TDI
 //			{Dio_PORTC, pin_6, STD_OUT},	// TOSC1
-//			{Dio_PORTC, pin_7, STD_OUT},	// TOSC2
+			{Dio_PORTC, pin_7, STD_OUT},	// TOSC2
 /** PORT D **/
 //			{Dio_PORTD, pin_0, STD_OUT},	// RXD
 //			{Dio_PORTD, pin_1, STD_OUT},	// TXD
