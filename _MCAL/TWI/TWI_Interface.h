@@ -23,6 +23,9 @@
 
 #define Master_Data_Transmit_ACK		0x28
 #define Master_Data_Receive_ACK			0x50
+#define Master_Data_Receive_NACK		0X58
+
+
 
 /* ----------------- Section : Data types Declarations -----------------*/
 
@@ -37,9 +40,7 @@ void TWI_voidSendReapeatedStartCondition(void);
 void TWI_voidSendSlaveAdd_WriteRequest(u8 copy_u8SlaveAddress);
 void TWI_voidSendSlaveAdd_ReadRequest(u8 copy_u8SlaveAddress);
 void TWI_voidWriteMasterDataByte(u8 copy_u8Data);
-void TWI_voidReadMasterDataByte(u8 *copy_u8PtrData);
-
-void TWI_send_NACK(void);
+void TWI_voidReadMasterDataByteNACK(u8 *copy_u8PtrData);
 void TWI_voidReadMasterDataByteACK(u8 *copy_u8PtrData);
 
 //Slave APIs

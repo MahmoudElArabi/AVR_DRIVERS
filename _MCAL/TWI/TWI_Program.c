@@ -12,9 +12,6 @@
 #include "../../_MCAL/DIO/DIO_Interface.h"
 #include "../../_MY_LIBS/BIT_MATH.h"
 
-/* ----------------- Section : Static "Private" Functions Declaration / Functions pointers -----------------*/
-
-
 /* ----------------- Section : Software Interfaces Implementation -----------------*/
 
 void TWI_voidInitMaster(u8 copy_u8MsterAddress)
@@ -110,17 +107,19 @@ void TWI_voidWriteMasterDataByte(u8 copy_u8Data)
 	while(STATUS_VALUE != Master_Data_Transmit_ACK);
 }
 
-void TWI_voidReadMasterDataByte(u8 *copy_u8PtrData)
+void TWI_voidReadMasterDataByteNACK(u8 *copy_u8PtrData)
 {
+	CLR_BIT(_TWCR, _TWEA);	//Disable ACK
 	if (copy_u8PtrData != NULL)
 	{
 		// Clear Start condition Flag
 		SET_BIT(_TWCR, _TWINT);	//Clear the TWINT Flag
 		while(0 == GET_BIT(_TWCR, _TWINT));
-		// Check ACK is Positive
-//		while(STATUS_VALUE != Master_Data_Receive_ACK);
+		// Check NACK
+	while(STATUS_VALUE != Master_Data_Receive_NACK);
 		*copy_u8PtrData = _TWDR;
 	}
+	SET_BIT(_TWCR, _TWEA);	// //Enable ACK
 }
 
 

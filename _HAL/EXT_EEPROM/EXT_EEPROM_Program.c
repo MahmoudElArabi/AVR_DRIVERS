@@ -35,7 +35,7 @@ void EEPROM_voidRead_Byte(u16 copy_u16WordAdd, u8 *copy_u8PtrReceivedData)
 {
 	if(copy_u8PtrReceivedData != NULL)
 	{
-		CLR_BIT(_TWCR, _TWEA);
+		// CLR_BIT(_TWCR, _TWEA);
 		u8 local_u8Add = (copy_u16WordAdd >> 8) | EEPROM_FIXED_ADDRESS ;
 		TWI_voidSendStartCondition();
 		TWI_voidSendSlaveAdd_WriteRequest(local_u8Add);
@@ -45,7 +45,7 @@ void EEPROM_voidRead_Byte(u16 copy_u16WordAdd, u8 *copy_u8PtrReceivedData)
 
 		TWI_voidSendSlaveAdd_ReadRequest(local_u8Add);
 
-		TWI_voidReadMasterDataByte(copy_u8PtrReceivedData);
+		TWI_voidReadMasterDataByteNACK(copy_u8PtrReceivedData);
 
 		TWI_voidSendStopCondition();
 
@@ -73,7 +73,7 @@ void EEPROM_voidWrite_Page(u16 copy_u16WordAdd, u8 *copy_u8Data, u8 copy_u8Size)
 
 void EEPROM_voidRead_Page(u16 copy_u16WordAdd, u8 *copy_u8PtrReceivedData, u8 copy_u8Size)
 {
-	SET_BIT(_TWCR, _TWEA);
+//	SET_BIT(_TWCR, _TWEA);
     u8 local_u8Add = (copy_u16WordAdd >> 8) | EEPROM_FIXED_ADDRESS;
     TWI_voidSendStartCondition();
     TWI_voidSendSlaveAdd_WriteRequest(local_u8Add);
