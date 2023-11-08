@@ -15,7 +15,7 @@
 
 /* ----------------- Section : Static "Private" Functions Declaration / Globals -----------------*/
 static void LCD_Data_write(u8 data);
-static void LCD4_Command_Write(u8 command);
+void LCD4_Command_Write(u8 command);
 
 u8 current_pos = 0;
 
@@ -51,6 +51,7 @@ void lcd4_Init(void)
 void lcd4_CLR(void)
 {
 	LCD4_Command_Write(0x01);
+	current_pos = 0;
 }
 
 /**
@@ -89,9 +90,9 @@ void lcd4_disply_char (const u8 character)
 void lcd4_disply_string (const u8* str)
 {
 	 while (*str){
-		lcd4_disply_char(*str);
-		str++;
-		}
+	lcd4_disply_char(*str);
+	str++;
+	}
 }
 
 /**
@@ -163,15 +164,19 @@ void lcd4_set_cursor(u8 row, u8 coul){
     switch (row){
         case ROW1:
             LCD4_Command_Write(0x80+coul);
+            current_pos = 0;
         break;
         case ROW2:
             LCD4_Command_Write(0xC0+coul);
+            current_pos = 20;
         break;
         case ROW3:
             LCD4_Command_Write(0x94+coul);
+            current_pos = 40;
         break;
         case ROW4:
             LCD4_Command_Write(0xD4+coul);
+            current_pos = 60;
         break;
         default:
         	break;
@@ -181,7 +186,7 @@ void lcd4_set_cursor(u8 row, u8 coul){
 void displayTextAnimated(const char *text) {
     for (int i = 0; text[i] != '\0'; i++) {
         lcd4_disply_char(text[i]);
-        _delay_ms(20); // Adjust the delay as needed
+        _delay_ms(50); // Adjust the delay as needed
     }
 }
 /* ----------------- Section : Static "Private" Functions Declaration Implementation -----------------*/
@@ -209,7 +214,7 @@ static void LCD_Data_write(u8 data)
 	_delay_ms(1);
 }
 
-static void LCD4_Command_Write(u8 command)
+void LCD4_Command_Write(u8 command)
 {
 	Dio_WriteChannel(RS,STD_LOW);
 

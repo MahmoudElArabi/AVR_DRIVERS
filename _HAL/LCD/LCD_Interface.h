@@ -45,7 +45,7 @@
 #define D4	                    PB_0
 #define D5	                    PB_1
 #define D6	                    PB_2
-#define D7	                    PB_4
+#define D7	                    PB_3
 
 #define RS	                    PA_3
 #define EN	                    PA_2
@@ -153,4 +153,7 @@ void lcd4_disply_CustomCharacter(u8 row, u8 col, u8* CustomCharacter, u8 MemoryP
 void lcd4_set_cursor(u8 row, u8 coul);
 
 void displayTextAnimated(const char *text) ;
+
+void LCD4_Command_Write(u8 command);
+
 #endif /* HAL_7SEGMENTS_LCD_H_ */

@@ -17,5 +17,4 @@ void SPI_voidTranseive(u8 copy_u8_TX_data, u8 * copy_u8_RX_data);
 
 void SPI_voidTransmit_Async(u8 copy_u8_TX_data, void(*PtrFunc)(u8 copy_u8_RX_data));
 
-
 #endif /* MCAL_SPI_SPI_INTERFACE_H_ */

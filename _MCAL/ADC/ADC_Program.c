@@ -171,4 +171,3 @@ static void ADC_Select_Channel(u8 u8_Copy_CH)
 	default: break;
 	}
 }
-

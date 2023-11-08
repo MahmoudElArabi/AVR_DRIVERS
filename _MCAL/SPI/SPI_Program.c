@@ -22,10 +22,11 @@ void SPI_voidInit(void)
 {
 #if SPI_MODE	==	MASTER
    SET_BIT(_SPCR, 4);
-   //Clock Rate Prescaler	(Only for master)
+   //Clock Rate Prescaler 1MHZ	(Only for master)
    SET_BIT(_SPCR, 0);
    CLR_BIT(_SPCR, 1);
    CLR_BIT(_SPSR, 0);
+
 #elif SPI_MODE	==	SLAVE
    CLR_BIT(_SPCR, 4);
 #endif //SPI_MODE

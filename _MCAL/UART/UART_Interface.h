@@ -17,5 +17,6 @@ void UART_Init();
 void UART_TransmitData(u8 data);
 u8 UART_ReceiveData();
 
-
+void UART_TransmitString(const char* str);
+int UART_ReceiveNumber();
 #endif /* MCAL_UART_UART_INTERFACE_H_ */

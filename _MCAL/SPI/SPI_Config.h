@@ -15,7 +15,7 @@
 #define ASYNC_ACTIVE		2
 
 
-#define SPI_MODE			MASTER
+#define SPI_MODE			SLAVE
 
 #define SPI_SYNC			ASYNC_ACTIVE
 

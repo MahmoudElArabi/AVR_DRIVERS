@@ -36,14 +36,14 @@
 /* ----------------- Section : PORT Configuration -----------------*/
 Pin_ConfigType pins[] =	{
 /** PORT A **/
-//			{Dio_PORTA, pin_0, STD_OUT},	// ADC0
+			{Dio_PORTA, pin_0, STD_IN},	// ADC0
 //			{Dio_PORTA, pin_1, STD_OUT},	// ADC1
 //			{Dio_PORTA, pin_2, STD_OUT},	// ADC2
 //			{Dio_PORTA, pin_3, STD_OUT},	// ADC3
 //			{Dio_PORTA, pin_4, STD_OUT},	// ADC4
-//			{Dio_PORTA, pin_5, STD_OUT},	// ADC5
+			{Dio_PORTA, pin_5, STD_OUT},	// ADC5
 //			{Dio_PORTA, pin_6, STD_OUT},	// ADC6
-			{Dio_PORTA, pin_7, STD_OUT},	// ADC7
+//			{Dio_PORTA, pin_7, STD_OUT},	// ADC7
 /** PORT B **/
 //			{Dio_PORTB, pin_0, STD_OUT},	// XCK/T0
 //			{Dio_PORTB, pin_1, STD_OUT},	// T1
@@ -51,8 +51,8 @@ Pin_ConfigType pins[] =	{
 //			{Dio_PORTB, pin_3, STD_OUT},	// OC0/AIN1
 //			{Dio_PORTB, pin_4, STD_OUT},	// SS
 //			{Dio_PORTB, pin_5, STD_OUT},	// MOSI
-//			{Dio_PORTB, pin_6, STD_OUT},	// MISO
-			{Dio_PORTB, pin_7, STD_OUT},	// SCK
+			{Dio_PORTB, pin_6, STD_OUT},	// MISO
+//			{Dio_PORTB, pin_7, STD_OUT},	// SCK
 /** PORT C **/
 //			{Dio_PORTC, pin_0, STD_OUT},	// SCL
 //			{Dio_PORTC, pin_1, STD_OUT},	// SDA
@@ -61,16 +61,16 @@ Pin_ConfigType pins[] =	{
 //			{Dio_PORTC, pin_4, STD_OUT},	// TDO
 //			{Dio_PORTC, pin_5, STD_OUT},	// TDI
 //			{Dio_PORTC, pin_6, STD_OUT},	// TOSC1
-			{Dio_PORTC, pin_7, STD_OUT},	// TOSC2
+//			{Dio_PORTC, pin_7, STD_OUT},	// TOSC2
 /** PORT D **/
-//			{Dio_PORTD, pin_0, STD_OUT},	// RXD
+			{Dio_PORTD, pin_0, STD_OUT},	// RXD
 //			{Dio_PORTD, pin_1, STD_OUT},	// TXD
 //			{Dio_PORTD, pin_2, STD_OUT},	// INT0
 //			{Dio_PORTD, pin_3, STD_OUT},	// INT1
 //			{Dio_PORTD, pin_4, STD_OUT},	// OC1B
-//			{Dio_PORTD, pin_5, STD_OUT},	// OC1A
-//			{Dio_PORTD, pin_6, STD_OUT},	// ICP
-//			{Dio_PORTD, pin_7, STD_OUT},	// OC2
+			{Dio_PORTD, pin_5, STD_OUT},	// OC1A
+			{Dio_PORTD, pin_6, STD_OUT},	// ICP
+			{Dio_PORTD, pin_7, STD_OUT},	// OC2
 
 /*************** 7_Segment ***************/
 //			{Dio_PORTB, pin_0, STD_OUT },
@@ -83,22 +83,22 @@ Pin_ConfigType pins[] =	{
 //			{Dio_PORTB, pin_6, STD_OUT },
 
 /*************** LCD 4 BITS ***************/
-			{Dio_PORTB, pin_0, STD_OUT },
-			{Dio_PORTB, pin_1, STD_OUT },
-			{Dio_PORTB, pin_2, STD_OUT },
-			{Dio_PORTB, pin_4, STD_OUT },
-			{Dio_PORTA, pin_2, STD_OUT },
-			{Dio_PORTA, pin_3, STD_OUT },
+			{Dio_PORTB, pin_0, STD_OUT },	//D4
+			{Dio_PORTB, pin_1, STD_OUT },	//D5
+			{Dio_PORTB, pin_2, STD_OUT },	//D6
+			{Dio_PORTB, pin_3, STD_OUT },	//D7
+			{Dio_PORTA, pin_2, STD_OUT },	//EN
+			{Dio_PORTA, pin_3, STD_OUT },	//RS
 
 /*************** KEYPAD ***************/
-			{Dio_PORTC, pin_5, STD_OUT},	// Row 1
-			{Dio_PORTC, pin_4, STD_OUT},	// Row 2
-			{Dio_PORTC, pin_3, STD_OUT},	// Row 3
-			{Dio_PORTC, pin_2, STD_OUT},	// Row 4
-			{Dio_PORTD, pin_7, STD_IN},		// Column 1
-			{Dio_PORTD, pin_6, STD_IN},		// Column 2
-			{Dio_PORTD, pin_5, STD_IN},		// Column 3
-			{Dio_PORTD, pin_3, STD_IN},		// Column 4
+			{Dio_PORTC, pin_0, STD_OUT},	// Row 1
+			{Dio_PORTC, pin_1, STD_OUT},	// Row 2
+			{Dio_PORTC, pin_2, STD_OUT},	// Row 3
+			{Dio_PORTC, pin_3, STD_OUT},	// Row 4
+			{Dio_PORTC, pin_4, STD_IN},		// Column 1
+			{Dio_PORTC, pin_5, STD_IN},		// Column 2
+			{Dio_PORTC, pin_6, STD_IN},		// Column 3
+			{Dio_PORTC, pin_7, STD_IN},		// Column 4
 
 /*************** Terminate ***************/
 			{-1}
