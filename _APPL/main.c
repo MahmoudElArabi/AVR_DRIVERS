@@ -35,13 +35,14 @@ int main ()
 	lcd4_Init();
 	Keypad_Init();
 	ADC_void_Init();
+	SPI_voidInit();
 
 	// User asked to enter his ID and Pass
 	Asking_For_Info();
 	//now we need to send those data to the ADMIN to check if right and open the door
 	lcd4_CLR();
 	lcd4_disply_string((u8*)"Checking!");
-	SPI_voidInit();
+	Dio_WriteChannel(PA_6, 1);
 	SPI_voidTranseive(ID, &Received_SPI);
 	_delay_ms(100);
 	SPI_voidTranseive(((PASS / 100) % 10), &Received_SPI);
@@ -50,43 +51,40 @@ int main ()
 	_delay_ms(100);
 	SPI_voidTranseive((PASS % 10), &Received_SPI);
 	_delay_ms(100);
-	SPI_voidTranseive(3, &Received_SPI);
+	SPI_voidTranseive(1, &Received_SPI);
+	Dio_WriteChannel(PA_6, 0);
 
 	lcd4_CLR();
 	if(1 == Received_SPI)
 	{
-	label:
-		lcd4_CLR();
-		Slave_voidChooseMode_OnLCD();
-		switch (MODE)
+		while(1)
 		{
-		case 1:
-			Slave_voidDisplay_Mode();
-			goto label;
-			break;
-		case 2:
-			Slave_voidDisplay_Control();
-			if(Control == 1)
+			lcd4_CLR();
+			Slave_voidChooseMode_OnLCD();
+			switch (MODE)
 			{
-				Slave_voidSel_SoundSys();
-				goto label;
-			}
-			else if(Control == 2)
-			{
-				Slave_u8Fan();
-				goto label;
-			}
-			else if(Control == 3)
-			{
-				Slave_voidSel_Led();
-				if (CHOOSE == 3)
+			case 1:
+				Slave_voidDisplay_Mode();
+				break;
+			case 2:
+				Slave_voidDisplay_Control();
+				if(Control == 1)
 				{
-					goto label;
+					Slave_voidSel_SoundSys();
 				}
+				else if(Control == 2)
+				{
+					Slave_u8Fan();
+				}
+				else if(Control == 3)
+				{
+					Slave_voidSel_Led();
+				}
+				break;
+			default: break;
 			}
-			break;
-		default: break;
 		}
+
 	}
 	else
 	{
@@ -98,10 +96,12 @@ int main ()
 		PASS = 0;
 		Received_SPI = 0;
 		lcd4_disply_string((u8*)"Wrong, 2 trials");
+		lcd4_disply_string_at_X_Y((u8*)"Please Try again!", 2,1);
+		_delay_ms(2000);
 		Asking_For_Info();
 		lcd4_CLR();
 		lcd4_disply_string((u8*)"Checking!");
-		SPI_voidInit();
+		Dio_WriteChannel(PA_6, 1);
 		SPI_voidTranseive(ID, &Received_SPI);
 		_delay_ms(100);
 		SPI_voidTranseive(((PASS / 100) % 10), &Received_SPI);
@@ -110,7 +110,8 @@ int main ()
 		_delay_ms(100);
 		SPI_voidTranseive((PASS % 10), &Received_SPI);
 		_delay_ms(100);
-		SPI_voidTranseive(3, &Received_SPI);
+		SPI_voidTranseive(2, &Received_SPI);
+		Dio_WriteChannel(PA_6, 0);
 
 		lcd4_CLR();
 		if(1 == Received_SPI)
@@ -149,10 +150,12 @@ int main ()
 			PASS = 0;
 			Received_SPI = 0;
 			lcd4_disply_string((u8*)"Wrong, last trial");
+			lcd4_disply_string_at_X_Y((u8*)"Please Try again!", 2,1);
+			_delay_ms(2000);
 			Asking_For_Info();
 			lcd4_CLR();
 			lcd4_disply_string((u8*)"Checking!");
-			SPI_voidInit();
+			Dio_WriteChannel(PA_6, 1);
 			SPI_voidTranseive(ID, &Received_SPI);
 			_delay_ms(100);
 			SPI_voidTranseive(((PASS / 100) % 10), &Received_SPI);
@@ -162,6 +165,7 @@ int main ()
 			SPI_voidTranseive((PASS % 10), &Received_SPI);
 			_delay_ms(100);
 			SPI_voidTranseive(3, &Received_SPI);
+			Dio_WriteChannel(PA_6, 0);
 
 			lcd4_CLR();
 			if(1 == Received_SPI)

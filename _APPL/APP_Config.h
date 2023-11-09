@@ -42,7 +42,7 @@ Pin_ConfigType pins[] =	{
 //			{Dio_PORTA, pin_3, STD_OUT},	// ADC3
 //			{Dio_PORTA, pin_4, STD_OUT},	// ADC4
 			{Dio_PORTA, pin_5, STD_OUT},	// ADC5
-//			{Dio_PORTA, pin_6, STD_OUT},	// ADC6
+			{Dio_PORTA, pin_6, STD_OUT},	// ADC6
 //			{Dio_PORTA, pin_7, STD_OUT},	// ADC7
 /** PORT B **/
 //			{Dio_PORTB, pin_0, STD_OUT},	// XCK/T0
