@@ -15,7 +15,7 @@ u8 MODE = 0;
 u8 Control = 0;
 u8 LED = 0;
 u8 ID = 0;
-u8 PASS = 0;
+u16 PASS = 0;
 u8 Received_SPI = 0;
 u8 CHOOSE = 0;
 
