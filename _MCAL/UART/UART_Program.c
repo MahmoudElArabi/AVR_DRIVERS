@@ -13,7 +13,7 @@
 #include "../../_MCAL/DIO/DIO_Interface.h"
 #include "../../_MY_LIBS/BIT_MATH.h"
 #include <stdlib.h>
-
+#include <stdbool.h>
 /* ----------------- Section : Static "Private" Functions Declaration / Functions pointers -----------------*/
 
 
@@ -51,7 +51,7 @@ u8 UART_ReceiveData()
 	return _UDR;
 }
 
-#include <stdbool.h>
+
 
 // Function to receive a number over UART, terminated by '\r' (Enter key)
 int UART_ReceiveNumber() {
