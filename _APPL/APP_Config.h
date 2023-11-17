@@ -21,6 +21,7 @@
 #include "../_HAL/LCD/LCD_Interface.h"
 #include "../_HAL/SERVO/SRVM_Interface.h"
 #include "../_HAL/EXT_EEPROM/EXT_EEPROM_Interface.h"
+#include "../_HAL/Shceduler/scheduler.h"
 
 #include "../_MCAL/DIO/DIO_Interface.h"
 #include "../_MCAL/PORT/PORT_Interface.h"
@@ -39,7 +40,7 @@
 /* ----------------- Section : PORT Configuration -----------------*/
 Pin_ConfigType pins[] =	{
 /** PORT A **/
-//			{Dio_PORTA, pin_0, STD_IN},	// ADC0
+//			{Dio_PORTA, pin_0, STD_OUT},	// ADC0
 //			{Dio_PORTA, pin_1, STD_OUT},	// ADC1
 //			{Dio_PORTA, pin_2, STD_OUT},	// ADC2
 //			{Dio_PORTA, pin_3, STD_OUT},	// ADC3
@@ -48,10 +49,10 @@ Pin_ConfigType pins[] =	{
 			{Dio_PORTA, pin_6, STD_OUT},	// ADC6
 //			{Dio_PORTA, pin_7, STD_OUT},	// ADC7
 /** PORT B **/
-//			{Dio_PORTB, pin_0, STD_OUT},	// XCK/T0
-//			{Dio_PORTB, pin_1, STD_OUT},	// T1
-//			{Dio_PORTB, pin_2, STD_OUT},	// INT2/AIN0
-//			{Dio_PORTB, pin_3, STD_OUT},	// OC0/AIN1
+			{Dio_PORTB, pin_0, STD_OUT},	// XCK/T0
+			{Dio_PORTB, pin_1, STD_OUT},	// T1
+			{Dio_PORTB, pin_2, STD_OUT},	// INT2/AIN0
+			{Dio_PORTB, pin_3, STD_OUT},	// OC0/AIN1
 //			{Dio_PORTB, pin_4, STD_OUT},	// SS
 //			{Dio_PORTB, pin_5, STD_OUT},	// MOSI
 //			{Dio_PORTB, pin_6, STD_OUT},	// MISO
@@ -86,12 +87,12 @@ Pin_ConfigType pins[] =	{
 //			{Dio_PORTB, pin_6, STD_OUT },
 
 /*************** LCD 4 BITS ***************/
-			{Dio_PORTB, pin_0, STD_OUT },	//D4
-			{Dio_PORTB, pin_1, STD_OUT },	//D5
-			{Dio_PORTB, pin_2, STD_OUT },	//D6
-			{Dio_PORTB, pin_3, STD_OUT },	//D7
-			{Dio_PORTA, pin_2, STD_OUT },	//EN
-			{Dio_PORTA, pin_3, STD_OUT },	//RS
+//			{Dio_PORTB, pin_0, STD_OUT },	//D4
+//			{Dio_PORTB, pin_1, STD_OUT },	//D5
+//			{Dio_PORTB, pin_2, STD_OUT },	//D6
+//			{Dio_PORTB, pin_3, STD_OUT },	//D7
+//			{Dio_PORTA, pin_2, STD_OUT },	//EN
+//			{Dio_PORTA, pin_3, STD_OUT },	//RS
 
 /*************** KEYPAD ***************/
 //			{Dio_PORTC, pin_0, STD_OUT},	// Row 1

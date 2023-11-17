@@ -6,27 +6,49 @@
  */
 
 #include "APP_Config.h"
+#include "../_MCAL/TIMER0/TMR0_Registers.h"
 
-u8 duty = 0;
-u32 freq = 0;
+void toggle_led1();
+void toggle_led2();
+void toggle_led3();
+void toggle_led4();
 
-int main ()
-{
+
+int main() {
 	Port_Init(pins);
-	lcd4_Init();
-
 	GI_voidEnable();
-	ICU_voidInit();
 
-	ICU_voidGetDutyCycle(&duty);
-	ICU_voidGetFrequency(&freq);
 
-	while(1)
-	{
-		lcd4_disply_num(duty);
-		lcd4_disply_char('_');
-		lcd4_disply_num(freq);
-		_delay_ms(100);
-	}
+	TMR0_voidInit();
+
+	OS_voidCreateTask(0,200,0,toggle_led1);
+	OS_voidCreateTask(1,200,100,toggle_led2);
+	OS_voidCreateTask(2,200,150,toggle_led3);
+
+	OS_voidStartScheduler();
+
+    while (1) {
+
+    }
 }
 
+
+// Task to toggle LED connected to PORTB, Pin 0
+void toggle_led1() {
+    Dio_FlipChannel(PB_0);
+}
+
+// Task to toggle LED connected to PORTB, Pin 1
+void toggle_led2() {
+    Dio_FlipChannel(PB_1);
+}
+
+// Task to toggle LED connected to PORTB, Pin 2
+void toggle_led3() {
+    Dio_FlipChannel(PB_2);
+}
+
+// Task to toggle LED connected to PORTB, Pin 3
+void toggle_led4() {
+    Dio_FlipChannel(PB_3);
+}

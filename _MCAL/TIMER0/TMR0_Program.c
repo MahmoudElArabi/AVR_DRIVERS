@@ -229,6 +229,7 @@ static void Enable_OVI0(void)
 {
 	SET_BIT(_TIMSK, 0);
 }
+
 #elif TMR0_MODE == TMR0_CTC_MODE
 static void Enable_OCI0(void)
 {
@@ -282,18 +283,20 @@ void __vector_10(void) __attribute__((signal));
 
 void __vector_11(void)
 {
-	static u16 count = 0;
-	count ++;
-	if(count == TMR0_OVERFLOW)
-	{
-		TMR0_Preload_value_set(113);
-		count = 0;
-		if(privatePTR_OV !=NULL)
-			{
-				privatePTR_OV();
-			}
-	}
+	static u16 local_u16ovCounter = 0;
+	local_u16ovCounter++;
 
+	if (TMR0_OVERFLOW == local_u16ovCounter) {
+		// Reload preload value
+		_TCNT0 = TMR0_PRELOAD;
+		// Clear the counter
+		local_u16ovCounter = 0;
+
+		// Call the callback function if assigned
+		if (privatePTR_OV != NULL) {
+			privatePTR_OV();
+		}
+	}
 }
 
 
