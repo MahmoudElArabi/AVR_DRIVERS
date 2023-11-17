@@ -20,15 +20,16 @@ int main() {
 
     while (1)
     {
-    	Dio_WriteChannel(PD_0, 1);
-    	_delay_us(10);
-    	Dio_WriteChannel(PD_0, 0);
-    	_delay_ms(60);
+    	Ultra_Sonic_void_trigger(PD_0);
+    	d = Ultra_Sonic_Distance_in_cm();
 
-    	d = ICU_u32GetFallingEdgeTime() / 58;
-    	lcd4_disply_num(d);
-    	_delay_ms(50);
-    	lcd4_CLR();
+    	if(d < 20)
+    	{
+    		Dio_WriteChannel(PA_4, 1);
+    	}
+    	else {
+    		Dio_WriteChannel(PA_4, 0);
+		}
     }
 }
 
