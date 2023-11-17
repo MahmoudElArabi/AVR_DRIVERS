@@ -19,6 +19,7 @@ volatile static u16 private_u16_On_Period ;
 volatile static u16 private_u16_Off_Period ;
 
 /* ----------------- Section : Software Interfaces Implementation -----------------*/
+
 void ICU_voidInit(void)
 {
 	// Timer 1 mode --> Normal
@@ -58,6 +59,11 @@ void ICU_voidGetFrequency(u32 * copy_u32_freq_HZ)
 	}
 }
 
+u32 ICU_u32GetFallingEdgeTime(void)
+{
+    // Assuming the time is in microseconds
+    return (u32)private_u16_On_Period;
+}
 
 /* ----------------- Section : ISRs -----------------*/
 

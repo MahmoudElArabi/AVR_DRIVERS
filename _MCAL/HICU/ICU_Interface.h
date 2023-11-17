@@ -22,5 +22,6 @@ void ICU_voidInit(void);
 void ICU_voidGetDutyCycle(u8 * copy_u8_duty);
 void ICU_voidGetFrequency(u32 * copy_u32_freq_hz);
 
+u32 ICU_u32GetFallingEdgeTime(void);
 
 #endif /* MCAL_HICU_INTERFACE_H_ */
