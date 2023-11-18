@@ -5,35 +5,23 @@
  *      Author: Mahmoud El Arabi
  */
 
-#ifndef HAL_SHCEDULER_SCHEDULER_H_
-#define HAL_SHCEDULER_SCHEDULER_H_
+#ifndef SIMPLE_SCHEDULER_H
+#define SIMPLE_SCHEDULER_H
 
+/* ----------------- Section : includes -----------------*/
 #include "../../_MY_LIBS/STD_TYPES.h"
 
-#define OS_NUMBER_OF_TASKS		4
-#define OS_TASK_DELETED			2
-#define OS_TASK_READY			1
-#define OS_TASK_SUSPENDED		0
+/* ----------------- Section : Defined Data Types -----------------*/
+#define MAX_NUMBER_OF_TASKS      5
 
+typedef struct {
+    u8 Task_Periodicity;
+    u8 Task_Priority;
+    void (*Task_FuncPtr)(void);
+} task_t;
 
-typedef struct{
-	u8 Periodicity;
-	u8 InitialDelay;
-	u8 TaskID;
-	u8 State;
-	u8 SuspendTime;
-	void (*Fptr)(void);
-}Task_t;
+/* ----------------- Section : Software Interfaces Declarations -----------------*/
+void Task_Creat(u8 Copy_u8Priority, u16 Copy_u8Periodicity, void (*Fptr)(void));
+void Scheduler_Start(void);
 
-
-void Scheduler(void);
-void OS_voidCreateTask(u8 Copy_u8ID, u16 Copy_u8Periodicity, u16 Copy_u8InitialDelay, void (*ptr)(void));
-void OS_voidDeleteTask(u8 Copy_u8ID);
-void OS_voidSuspendTask(u8 Copy_u8ID, u8 Copy_u8SuspendTime);
-void OS_voidStartScheduler(void);
-void OS_voidResumeTask(u8 Copy_u8ID);
-u8 OS_u8GetTaskState(u8 Copy_u8ID);
-
-
-
-#endif /* HAL_SHCEDULER_SCHEDULER_H_ */
+#endif // SIMPLE_SCHEDULER_H
