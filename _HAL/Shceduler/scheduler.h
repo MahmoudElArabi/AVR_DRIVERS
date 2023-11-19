@@ -12,8 +12,8 @@
 #include "../../_MY_LIBS/STD_TYPES.h"
 
 /* ----------------- Section : Defined Data Types -----------------*/
-#define MAX_NUMBER_OF_TASKS      5
-
+#define MAX_NUMBER_OF_TASKS     5
+#define MAX_TASKS_SAME_PRIO		2
 typedef struct {
 	void (*Task_FuncPtr)(void);
     u16 Task_Periodicity;

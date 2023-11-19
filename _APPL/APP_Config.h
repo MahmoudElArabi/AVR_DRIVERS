@@ -54,13 +54,13 @@ Pin_ConfigType pins[] =	{
 			{Dio_PORTB, pin_1, STD_OUT},	// T1
 			{Dio_PORTB, pin_2, STD_OUT},	// INT2/AIN0
 			{Dio_PORTB, pin_3, STD_OUT},	// OC0/AIN1
-//			{Dio_PORTB, pin_4, STD_OUT},	// SS
+			{Dio_PORTB, pin_4, STD_OUT},	// SS
 //			{Dio_PORTB, pin_5, STD_OUT},	// MOSI
 //			{Dio_PORTB, pin_6, STD_OUT},	// MISO
 //			{Dio_PORTB, pin_7, STD_OUT},	// SCK
 /** PORT C **/
-//			{Dio_PORTC, pin_0, STD_OUT},	// SCL
-//			{Dio_PORTC, pin_1, STD_OUT},	// SDA
+			{Dio_PORTC, pin_0, STD_OUT},	// SCL
+			{Dio_PORTC, pin_1, STD_OUT},	// SDA
 //			{Dio_PORTC, pin_2, STD_OUT},	// SDA
 //			{Dio_PORTC, pin_3, STD_OUT},	// TMS
 //			{Dio_PORTC, pin_4, STD_OUT},	// TDO
