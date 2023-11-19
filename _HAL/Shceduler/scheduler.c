@@ -16,13 +16,14 @@ static u8 created_tasks_number = 0;
 static void Simple_Scheduler(void);
 
 /* ----------------- Section : Software Interfaces Implementation -----------------*/
-void Task_Creat(u8 Copy_u8Priority, u16 Copy_u8Periodicity, void (*Fptr)(void))
+void Task_Creat(u8 Copy_u8Priority, u16 Copy_u8Periodicity, void (*Fptr)(void), u16 Copy_u16InitialDelay)
 {
     My_Tasks[Copy_u8Priority].Task_FuncPtr = Fptr;
     My_Tasks[Copy_u8Priority].Task_Periodicity = Copy_u8Periodicity;
     My_Tasks[Copy_u8Priority].Task_Priority = Copy_u8Priority;
+    My_Tasks[Copy_u8Priority].Task_InitialDelay = Copy_u16InitialDelay;
 
-    temp_priodicity[Copy_u8Priority] = Copy_u8Periodicity;
+    temp_priodicity[Copy_u8Priority] = Copy_u16InitialDelay;
     created_tasks_number++;
 }
 

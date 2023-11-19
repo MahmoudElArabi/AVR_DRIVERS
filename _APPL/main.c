@@ -9,11 +9,11 @@ int main() {
 	Port_Init(pins);
 	GI_voidEnable();
 
-	Task_Creat(0,100,toggle_led1);
-	Task_Creat(1,150,toggle_led2);
-	Task_Creat(2,50,toggle_led3);
+	Task_Creat(0,500, toggle_led1, 100);
+	Task_Creat(1,250, toggle_led2, 50);
+	Task_Creat(2,320, toggle_led3, 40);
 
-	Task_Creat(4,0,NULL);
+	Task_Creat(4,0, NULL ,0);
 
 	Scheduler_Start();
 

@@ -15,13 +15,16 @@
 #define MAX_NUMBER_OF_TASKS      5
 
 typedef struct {
-    u8 Task_Periodicity;
-    u8 Task_Priority;
-    void (*Task_FuncPtr)(void);
+	void (*Task_FuncPtr)(void);
+    u16 Task_Periodicity;
+    u16 Task_InitialDelay;
+    u8  Task_Priority;
 } task_t;
 
+
+
 /* ----------------- Section : Software Interfaces Declarations -----------------*/
-void Task_Creat(u8 Copy_u8Priority, u16 Copy_u8Periodicity, void (*Fptr)(void));
+void Task_Creat(u8 Copy_u8Priority, u16 Copy_u8Periodicity, void (*Fptr)(void), u16 Copy_u16InitialDelay);
 void Scheduler_Start(void);
 
 #endif // SIMPLE_SCHEDULER_H
