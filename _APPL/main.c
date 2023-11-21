@@ -5,6 +5,8 @@ u8 d2;
 
 u8 Received = 0;
 
+u16 distanceArray[4] = { 0 };
+
 int main() {
 	Port_Init(pins);
 	GI_voidEnable();
@@ -12,35 +14,35 @@ int main() {
 	ICU_voidInit();
 	SPI_voidInit();
 
-	Dio_WriteChannel(PA_1, 1);
-	Dio_WriteChannel(PA_4, 0);
-
-	while (1)
-    {
-    	Ultra_Sonic_void_trigger(PC_0);
-    	d1 = Ultra_Sonic_Distance_in_cm();
-
-    	if( (d1 < 20) && (d2 > 20) )
-    	{
-    		Dio_WriteChannel(PA_4, 1);
-    		Dio_WriteChannel(PA_1, 0);
-    		do
-    		{
-    			SPI_voidTranseive(0x66, &Received);
-    		}while (GET_BIT(_PINB, 4) == 0);
-    		Dio_WriteChannel(PA_1, 1);
-    		Dio_WriteChannel(PA_4, 0);
-    	}
-    	if( (d1 < 20) && (d2 < 20) )
-			{
-				Dio_WriteChannel(PA_4, 1);
-				Dio_WriteChannel(PA_1, 0);
-				do
-				{
-					SPI_voidTranseive(0x77, &Received);
-				}while (GET_BIT(_PINB, 4) == 0);
-				Dio_WriteChannel(PA_1, 1);
-				Dio_WriteChannel(PA_4, 0);
+	while (1) {
+		for (u8 channel = 0; channel < 4; channel++) {
+			switch (channel) {
+			case 0:
+				Ultra_Sonic_void_trigger(PC_0);
+				distanceArray[0] = Ultra_Sonic_Distance_in_cm();
+				break;
+			case 1:
+				Ultra_Sonic_void_trigger(PC_1);
+				distanceArray[1] = Ultra_Sonic_Distance_in_cm();
+				break;
+			case 2:
+				Ultra_Sonic_void_trigger(PC_2);
+				distanceArray[2] = Ultra_Sonic_Distance_in_cm();
+				break;
+			case 3:
+				Ultra_Sonic_void_trigger(PC_3);
+				distanceArray[3] = Ultra_Sonic_Distance_in_cm();
+				break;
 			}
-    }
+		}
+		lcd4_CLR();
+		lcd4_set_cursor(1, 1);
+		lcd4_disply_num(distanceArray[0]);
+		lcd4_set_cursor(2, 1);
+		lcd4_disply_num(distanceArray[1]);
+		lcd4_set_cursor(3, 1);
+		lcd4_disply_num(distanceArray[2]);
+		lcd4_set_cursor(4, 1);
+		lcd4_disply_num(distanceArray[3]);
+	}
 }

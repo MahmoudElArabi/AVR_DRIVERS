@@ -33,7 +33,6 @@
 #include "../_MCAL/TIMER1/TMR1_Interface.h"
 #include "../_MCAL/TIMER2/TMR2_Interface.h"
 #include "../_MCAL/SPI/SPI_interface.h"
-//#include "../_MCAL/SPI2/SPI_int.h"
 #include "../_MCAL/UART/UART_Interface.h"
 #include "../_MCAL/TWI/TWI_Interface.h"
 #include "../_MCAL/WDT/WDT_Interface.h"
