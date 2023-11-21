@@ -1,48 +1,46 @@
 #include "APP_Config.h"
-#include "../_MCAL/TIMER0/TMR0_Registers.h"
 
-void toggle_led1();
-void toggle_led2();
-void toggle_led3();
-void toggle_led4();
-void toggle_led5();
+u8 d1;
+u8 d2;
+
+u8 Received = 0;
 
 int main() {
 	Port_Init(pins);
 	GI_voidEnable();
+	lcd4_Init();
+	ICU_voidInit();
+	SPI_voidInit();
 
-	Task_Creat(0, 50, toggle_led1, 50);
-	Task_Creat(0, 70, toggle_led2, 100);
-	Task_Creat(2, 110, toggle_led3, 150);
-	Task_Creat(2, 150, toggle_led4, 100);
-	Task_Creat(4, 200, toggle_led5, 150);
+	Dio_WriteChannel(PA_1, 1);
+	Dio_WriteChannel(PA_4, 0);
 
-	Task_Creat(5,0, NULL ,0);
-	Scheduler_Start();
-
-    while (1)
+	while (1)
     {
+    	Ultra_Sonic_void_trigger(PC_0);
+    	d1 = Ultra_Sonic_Distance_in_cm();
 
+    	if( (d1 < 20) && (d2 > 20) )
+    	{
+    		Dio_WriteChannel(PA_4, 1);
+    		Dio_WriteChannel(PA_1, 0);
+    		do
+    		{
+    			SPI_voidTranseive(0x66, &Received);
+    		}while (GET_BIT(_PINB, 4) == 0);
+    		Dio_WriteChannel(PA_1, 1);
+    		Dio_WriteChannel(PA_4, 0);
+    	}
+    	if( (d1 < 20) && (d2 < 20) )
+			{
+				Dio_WriteChannel(PA_4, 1);
+				Dio_WriteChannel(PA_1, 0);
+				do
+				{
+					SPI_voidTranseive(0x77, &Received);
+				}while (GET_BIT(_PINB, 4) == 0);
+				Dio_WriteChannel(PA_1, 1);
+				Dio_WriteChannel(PA_4, 0);
+			}
     }
-}
-
-
-void toggle_led1() {
-    Dio_FlipChannel(PB_0);
-}
-
-void toggle_led2() {
-    Dio_FlipChannel(PB_1);
-}
-
-void toggle_led3() {
-    Dio_FlipChannel(PB_2);
-}
-
-void toggle_led4() {
-    Dio_FlipChannel(PB_3);
-}
-
-void toggle_led5() {
-    Dio_FlipChannel(PB_4);
 }

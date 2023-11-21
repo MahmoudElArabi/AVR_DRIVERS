@@ -33,6 +33,7 @@
 #include "../_MCAL/TIMER1/TMR1_Interface.h"
 #include "../_MCAL/TIMER2/TMR2_Interface.h"
 #include "../_MCAL/SPI/SPI_interface.h"
+//#include "../_MCAL/SPI2/SPI_int.h"
 #include "../_MCAL/UART/UART_Interface.h"
 #include "../_MCAL/TWI/TWI_Interface.h"
 #include "../_MCAL/WDT/WDT_Interface.h"
@@ -42,27 +43,27 @@
 Pin_ConfigType pins[] =	{
 /** PORT A **/
 //			{Dio_PORTA, pin_0, STD_OUT},	// ADC0
-//			{Dio_PORTA, pin_1, STD_OUT},	// ADC1
+			{Dio_PORTA, pin_1, STD_OUT},	// ADC1
 //			{Dio_PORTA, pin_2, STD_OUT},	// ADC2
 //			{Dio_PORTA, pin_3, STD_OUT},	// ADC3
-//			{Dio_PORTA, pin_4, STD_OUT},	// ADC4
+			{Dio_PORTA, pin_4, STD_OUT},	// ADC4
 //			{Dio_PORTA, pin_5, STD_OUT},	// ADC5
 //			{Dio_PORTA, pin_6, STD_OUT},	// ADC6
 //			{Dio_PORTA, pin_7, STD_OUT},	// ADC7
 /** PORT B **/
-			{Dio_PORTB, pin_0, STD_OUT},	// XCK/T0
-			{Dio_PORTB, pin_1, STD_OUT},	// T1
-			{Dio_PORTB, pin_2, STD_OUT},	// INT2/AIN0
-			{Dio_PORTB, pin_3, STD_OUT},	// OC0/AIN1
-			{Dio_PORTB, pin_4, STD_OUT},	// SS
+//			{Dio_PORTB, pin_0, STD_OUT},	// XCK/T0
+//			{Dio_PORTB, pin_1, STD_OUT},	// T1
+//			{Dio_PORTB, pin_2, STD_OUT},	// INT2/AIN0
+//			{Dio_PORTB, pin_3, STD_OUT},	// OC0/AIN1
+//			{Dio_PORTB, pin_4, STD_OUT},	// SS
 //			{Dio_PORTB, pin_5, STD_OUT},	// MOSI
-//			{Dio_PORTB, pin_6, STD_OUT},	// MISO
+			{Dio_PORTB, pin_6, STD_OUT},	// MISO
 //			{Dio_PORTB, pin_7, STD_OUT},	// SCK
 /** PORT C **/
 			{Dio_PORTC, pin_0, STD_OUT},	// SCL
 			{Dio_PORTC, pin_1, STD_OUT},	// SDA
-//			{Dio_PORTC, pin_2, STD_OUT},	// SDA
-//			{Dio_PORTC, pin_3, STD_OUT},	// TMS
+			{Dio_PORTC, pin_2, STD_OUT},	// SDA
+			{Dio_PORTC, pin_3, STD_OUT},	// TMS
 //			{Dio_PORTC, pin_4, STD_OUT},	// TDO
 //			{Dio_PORTC, pin_5, STD_OUT},	// TDI
 //			{Dio_PORTC, pin_6, STD_OUT},	// TOSC1
@@ -88,12 +89,12 @@ Pin_ConfigType pins[] =	{
 //			{Dio_PORTB, pin_6, STD_OUT },
 
 /*************** LCD 4 BITS ***************/
-//			{Dio_PORTB, pin_0, STD_OUT },	//D4
-//			{Dio_PORTB, pin_1, STD_OUT },	//D5
-//			{Dio_PORTB, pin_2, STD_OUT },	//D6
-//			{Dio_PORTB, pin_3, STD_OUT },	//D7
-//			{Dio_PORTA, pin_2, STD_OUT },	//EN
-//			{Dio_PORTA, pin_3, STD_OUT },	//RS
+			{Dio_PORTB, pin_0, STD_OUT },	//D4
+			{Dio_PORTB, pin_1, STD_OUT },	//D5
+			{Dio_PORTB, pin_2, STD_OUT },	//D6
+			{Dio_PORTB, pin_3, STD_OUT },	//D7
+			{Dio_PORTA, pin_2, STD_OUT },	//EN
+			{Dio_PORTA, pin_3, STD_OUT },	//RS
 
 /*************** KEYPAD ***************/
 //			{Dio_PORTC, pin_0, STD_OUT},	// Row 1
