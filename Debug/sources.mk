@@ -20,9 +20,6 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-FreeRTOS/Source \
-FreeRTOS/Source/portable/GCC/ATMega323 \
-FreeRTOS/Source/portable/MemMang \
 _APPL \
 _HAL/7SEGMENTS \
 _HAL/DCMotor \
@@ -45,5 +42,4 @@ _MCAL/TIMER2 \
 _MCAL/TWI \
 _MCAL/UART \
 _MCAL/WDT \
-_MY_LIBS/LINKED_LIST \
 

@@ -41,7 +41,8 @@ _APPL/main.o _APPL/main.o: ../_APPL/main.c ../_APPL/APP_Config.h \
   ../_APPL/../_MCAL/WDT/WDT_Interface.h \
   ../_APPL/../_MCAL/WDT/../../_MY_LIBS/STD_TYPES.h \
   ../_APPL/../_MCAL/HICU/ICU_Interface.h \
-  ../_APPL/../_MCAL/HICU/../../_MY_LIBS/STD_TYPES.h
+  ../_APPL/../_MCAL/HICU/../../_MY_LIBS/STD_TYPES.h \
+  ../_APPL/../_MCAL/SPI/SPI_Registers.h
 
 ../_APPL/APP_Config.h:
 
@@ -132,3 +133,5 @@ _APPL/main.o _APPL/main.o: ../_APPL/main.c ../_APPL/APP_Config.h \
 ../_APPL/../_MCAL/HICU/ICU_Interface.h:
 
 ../_APPL/../_MCAL/HICU/../../_MY_LIBS/STD_TYPES.h:
+
+../_APPL/../_MCAL/SPI/SPI_Registers.h:

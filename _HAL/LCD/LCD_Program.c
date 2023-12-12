@@ -52,6 +52,7 @@ void lcd4_CLR(void)
 {
 	LCD4_Command_Write(0x01);
 	current_pos = 0;
+	lcd4_set_cursor(1,1);
 }
 
 /**

@@ -8,7 +8,6 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include _MY_LIBS/LINKED_LIST/subdir.mk
 -include _MCAL/WDT/subdir.mk
 -include _MCAL/UART/subdir.mk
 -include _MCAL/TWI/subdir.mk
@@ -31,9 +30,6 @@ RM := rm -rf
 -include _HAL/DCMotor/subdir.mk
 -include _HAL/7SEGMENTS/subdir.mk
 -include _APPL/subdir.mk
--include FreeRTOS/Source/portable/MemMang/subdir.mk
--include FreeRTOS/Source/portable/GCC/ATMega323/subdir.mk
--include FreeRTOS/Source/subdir.mk
 -include subdir.mk
 -include objects.mk
 

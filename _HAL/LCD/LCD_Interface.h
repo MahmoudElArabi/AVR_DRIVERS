@@ -45,7 +45,7 @@
 #define D4	                    PB_0
 #define D5	                    PB_1
 #define D6	                    PB_2
-#define D7	                    PB_3
+#define D7	                    PB_4
 
 #define RS	                    PA_3
 #define EN	                    PA_2
